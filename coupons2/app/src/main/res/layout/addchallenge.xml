@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/coloredbackground">
+
+    <TextView
+        android:id="@+id/AddChallengeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Add a new challenge!"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="80dp"/>
+
+    <TextView
+        android:id="@+id/EnterQuestionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginLeft="10dp"
+        android:text="Question"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"/>
+
+    <EditText
+        android:id="@+id/EnterQuestionField"
+        android:padding="10dp"
+        android:textColor="#332FA2"
+        android:hint="Enter your question"
+        android:textSize="18sp"
+        android:layout_gravity="end"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/blue"
+        android:layout_width="350dp"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/EnterAnswerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginLeft="10dp"
+        android:text="Answer"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/EnterAnswerField"
+        android:padding="10dp"
+        android:textColor="#332FA2"
+        android:hint="Enter the answer"
+        android:textSize="18sp"
+        android:layout_gravity="end"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/blue"
+        android:layout_width="350dp"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/EnterCouponTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginLeft="10dp"
+        android:text="coupon"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/EnterCouponField"
+        android:padding="10dp"
+        android:textColor="#332FA2"
+        android:hint="Enter the coupon"
+        android:textSize="18sp"
+        android:layout_gravity="end"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/blue"
+        android:layout_width="350dp"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/EnterDiscountPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginLeft="10dp"
+        android:text="Discount percentage"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/EnterDiscountField"
+        android:padding="10dp"
+        android:textColor="#332FA2"
+        android:hint="Enter the discount percentage"
+        android:textSize="18sp"
+        android:layout_gravity="end"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/blue"
+        android:layout_width="350dp"
+        android:layout_height="50dp"/>
+
+
+<Button
+    android:id="@+id/addButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Add"
+    android:textColor="@color/Accent"
+    android:layout_gravity="center"
+    android:backgroundTint="@color/white"/>
+</LinearLayout>
+
