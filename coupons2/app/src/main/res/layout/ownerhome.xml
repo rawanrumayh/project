@@ -29,15 +29,21 @@
         android:textStyle="bold"
         android:layout_marginTop="50dp"/>
 
+ <HorizontalScrollView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/ChallengesLayout"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="80dp"
+        android:padding="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+</LinearLayout>
+ </HorizontalScrollView>
 
 
         <LinearLayout

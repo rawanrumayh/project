@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = new Intent(MainActivity.this,Challenge.class);
+        Intent intent = new Intent(MainActivity.this,OwnerHome.class);
         intent.putExtra("percentage","40");
         intent.putExtra("question","How are you?");
         intent.putExtra("answer","RAWAN");
