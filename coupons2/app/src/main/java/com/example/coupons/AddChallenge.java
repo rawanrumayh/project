@@ -47,10 +47,10 @@ EditText percentageField = (EditText) findViewById(R.id.EnterDiscountField);
                  answerField.requestFocus();
                  answerField.setError("FIELD CANNOT BE EMPTY");
              }
-             else if(!Answer.trim().matches("[a-zA-Z]+"))
+             else if(!Answer.trim().matches("^[a-zA-Z0-9]+$"))
              {
                  answerField.requestFocus();
-                 answerField.setError("ENTER ONLY ALPHABETICAL CHARACTERS");
+                 answerField.setError("ENTER ONLY ALPHANUMERICAL CHARACTERS");
              }
              else if (Answer.trim().length() >5){
                  answerField.requestFocus();
@@ -60,11 +60,6 @@ EditText percentageField = (EditText) findViewById(R.id.EnterDiscountField);
              else if (coupon.trim().length()==0){
                  couponField.requestFocus();
                  couponField.setError("FIELD CANNOT BE EMPTY");
-             }
-             else if(!coupon.trim().matches("[a-zA-Z ]+"))
-             {
-                 couponField.requestFocus();
-                 couponField.setError("ENTER ONLY ALPHABETICAL CHARACTERS");
              }
 
              else if (coupon.trim().length() >8){
