@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = new Intent(MainActivity.this,Challenge.class);
-        intent.putExtra("percentage","40");
-        intent.putExtra("question","How are you?");
-        intent.putExtra("answer","RAWAN");
-        intent.putExtra("coupon","ME");
+        intent.putExtra("percentage","15");
+        intent.putExtra("question","What is the largest continent in the world?");
+        intent.putExtra("answer","ASIA");
+        intent.putExtra("coupon","Enjoy");
 startActivity(intent);
 
     }
