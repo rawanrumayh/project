@@ -1,16 +1,23 @@
 package com.example.coupons;
 
+import static android.content.Context.LOCATION_SERVICE;
 import static androidx.constraintlayout.motion.widget.Debug.getLocation;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
@@ -66,9 +73,10 @@ public class MapsFragment extends Fragment implements LocationListener {
         }
     }
 
-    private void initLocation(){
-        getLocation();
-    }
+
+//    private void initLocation(){
+//        getLocation();
+//    }
 
 
 //    public void setCurrentLocation(MarkerOptions mo) {

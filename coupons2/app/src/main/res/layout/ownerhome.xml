@@ -53,6 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" android:id="@+id/map_holder"
         tools:ignore="Orientation">
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -69,6 +71,20 @@
             android:backgroundTint="@color/white"
             app:srcCompat="@android:drawable/ic_input_add"
             app:tint="@color/Accent" />
+
+        <TextView
+            android:id="@+id/lat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="U" />
+
+        <TextView
+            android:id="@+id/longg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="U2" />
 
     </LinearLayout>
     </FrameLayout>

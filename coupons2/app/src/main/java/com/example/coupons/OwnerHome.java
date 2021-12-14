@@ -1,5 +1,7 @@
 package com.example.coupons;
 
+import static java.sql.DriverManager.println;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -7,11 +9,11 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
+import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationRequest;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -26,16 +28,20 @@ import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class OwnerHome extends AppCompatActivity {
 
 
     private static final int PERMISSIONS_FINE_LOCATION = 99;
     FusedLocationProviderClient client;
-    boolean onUpdate= false;
-    Parcelable.Creator<LocationRequest> locationRequest;
+    boolean onUpdate = false;
 
     @SuppressLint("WrongConstant")
     @RequiresApi(api = Build.VERSION_CODES.S)
@@ -72,52 +78,74 @@ public class OwnerHome extends AppCompatActivity {
             }
         });
 
-//        try {
-            locationRequest = LocationRequest.CREATOR;
-//            locationRequest.setQuality(100);
-//
-//            updateGPS();
-//        } catch (Exception e){
-//            Log.e("e",
-//                    "onCreate: ",
-//                    e);
-//        };
+        updateGPS();
 
 
+    }
 
+    private void zoomMyCuurentLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+        if (location != null) {
+            double lat = location.getLatitude();
+            double longi = location.getLongitude();
+            LatLng latLng = new LatLng(lat, longi);
+//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.f));
+            Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
+        } else {
+            setMyLastLocation();
+        }
+    }
+
+    private void setMyLastLocation() {
+        Log.d("TAG", "setMyLastLocation: excecute, and get last location");
+        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    double lat = location.getLatitude();
+                    double longi = location.getLongitude();
+                    LatLng latLng = new LatLng(lat, longi);
+                    Log.d("TAG", "MyLastLocation coordinat :" + latLng);
+                    Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_SHORT).show();
+//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.f));
+                }
+            }
+        });
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
+        switch (requestCode) {
             case PERMISSIONS_FINE_LOCATION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
                     updateGPS();
-                else Toast.makeText(this, "this app was not granted permission", Toast.LENGTH_SHORT).show();
-                finish();
+                else
+                    Toast.makeText(this, "this app was not granted permission", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void updateGPS(){
-        client= LocationServices.getFusedLocationProviderClient(this);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            client.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(@NonNull Location location) {
-                    updateUIValue(location);
-                }
-            });
+
+    private void updateGPS() {
+        TextView lat = (TextView) findViewById(R.id.lat);
+        lat.setText("heeeereee33333");
+        client = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            zoomMyCuurentLocation();
         } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_FINE_LOCATION);
             }
         }
-    }
-
-    private void updateUIValue(Location location) {
-        Log.e("TAG", "updateUIValue1: "+String.valueOf(location.getLatitude()));
-        Log.e("TAG", "updateUIValue2: "+String.valueOf(location.getLongitude()));
     }
 
 
