@@ -1,39 +1,58 @@
 package com.example.coupons;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
+import android.location.Location;
+import android.location.LocationRequest;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class OwnerHome extends AppCompatActivity {
+
+
+    private static final int PERMISSIONS_FINE_LOCATION = 99;
+    FusedLocationProviderClient client;
+    boolean onUpdate= false;
+    Parcelable.Creator<LocationRequest> locationRequest;
+
+    @SuppressLint("WrongConstant")
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ownerhome);
 
 
+        Database dbHelper = new Database(OwnerHome.this);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colChallengeQuestion, Database.colChallengeAnswer, Database.colChallengeCoupon, Database.colChallengeCouponPercentage},
+                "Owner=?", new String[]{"1"}, null, null, null); //selection
 
-       Database dbHelper = new Database(OwnerHome.this);
-       SQLiteDatabase db = dbHelper.getReadableDatabase();
-       Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colChallengeQuestion, Database.colChallengeAnswer, Database.colChallengeCoupon,Database.colChallengeCouponPercentage},
-               "Owner=?", new String[] {"1"}, null, null, null); //selection
 
-
-// intent id
-if (cursor !=null)
-        {
+        // intent id
+        if (cursor != null) {
             while (cursor.moveToNext()) {
                 @SuppressLint("Range") String question = cursor.getString(cursor.getColumnIndex(Database.colChallengeQuestion));
                 @SuppressLint("Range") String answer = cursor.getString(cursor.getColumnIndex(Database.colChallengeAnswer));
@@ -45,62 +64,108 @@ if (cursor !=null)
         cursor.close();
 
 
-
         FloatingActionButton addButton = (FloatingActionButton) findViewById(R.id.addFloating);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OwnerHome.this,AddChallenge.class));
+                startActivity(new Intent(OwnerHome.this, AddChallenge.class));
             }
         });
+
+//        try {
+            locationRequest = LocationRequest.CREATOR;
+//            locationRequest.setQuality(100);
+//
+//            updateGPS();
+//        } catch (Exception e){
+//            Log.e("e",
+//                    "onCreate: ",
+//                    e);
+//        };
+
+
+
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case PERMISSIONS_FINE_LOCATION:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    updateGPS();
+                else Toast.makeText(this, "this app was not granted permission", Toast.LENGTH_SHORT).show();
+                finish();
+        }
+    }
+
+    private void updateGPS(){
+        client= LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            client.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(@NonNull Location location) {
+                    updateUIValue(location);
+                }
+            });
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_FINE_LOCATION);
+            }
+        }
+    }
+
+    private void updateUIValue(Location location) {
+        Log.e("TAG", "updateUIValue1: "+String.valueOf(location.getLatitude()));
+        Log.e("TAG", "updateUIValue2: "+String.valueOf(location.getLongitude()));
+    }
 
 
     private void AddView(String question, String answer, String coupon, String percentage) {
         LinearLayout Challengeslayout = (LinearLayout) findViewById(R.id.ChallengesLayout);
-        LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-        layout.rightMargin=10; layout.leftMargin=10; layout.topMargin=10; layout.bottomMargin=20;
+        LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layout.rightMargin = 10;
+        layout.leftMargin = 10;
+        layout.topMargin = 10;
+        layout.bottomMargin = 20;
         Challengeslayout.setOrientation(LinearLayout.HORIZONTAL);
-
-
 
 
         TextView questionTV = new TextView(this);
         questionTV.setText("Question:");
-        questionTV.setPadding(10,10,10,10);
+        questionTV.setPadding(10, 10, 10, 10);
         questionTV.setTypeface(Typeface.DEFAULT_BOLD);
 
         TextView questionV = new TextView(this);
         questionV.setText(question);
-        questionV.setPadding(10,60,10,10);
+        questionV.setPadding(10, 60, 10, 10);
 
         TextView answerTV = new TextView(this);
         answerTV.setText("Answer:");
-        answerTV.setPadding(10,160,10,10);
+        answerTV.setPadding(10, 160, 10, 10);
         answerTV.setTypeface(Typeface.DEFAULT_BOLD);
 
         TextView answerV = new TextView(this);
         answerV.setText(answer);
-        answerV.setPadding(10,210,10,10);
+        answerV.setPadding(10, 210, 10, 10);
 
         TextView couponTV = new TextView(this);
         couponTV.setText("Coupon:");
-        couponTV.setPadding(10,300,10,10);
+        couponTV.setPadding(10, 300, 10, 10);
         couponTV.setTypeface(Typeface.DEFAULT_BOLD);
 
         TextView couponV = new TextView(this);
         couponV.setText(coupon);
-        couponV.setPadding(10,360,10,10);
+        couponV.setPadding(10, 360, 10, 10);
 
         TextView PercTV = new TextView(this);
         PercTV.setText("Percentage:");
-        PercTV.setPadding(10,430,10,10);
+        PercTV.setPadding(10, 430, 10, 10);
         PercTV.setTypeface(Typeface.DEFAULT_BOLD);
 
         TextView percV = new TextView(this);
-        percV.setText(percentage+"%");
-        percV.setPadding(300,430,10,10);
+        percV.setText(percentage + "%");
+        percV.setPadding(300, 430, 10, 10);
 
 
         CardView card = new CardView(this);
@@ -108,7 +173,7 @@ if (cursor !=null)
         card.setRadius(10);
         card.setLayoutParams(layout);
         card.setCardElevation(20);
-        card.setContentPadding(20,30,20,30);
+        card.setContentPadding(20, 30, 20, 30);
         card.addView(questionTV);
         card.addView(questionV);
         card.addView(answerTV);

@@ -16,37 +16,38 @@ import java.util.Random;
 
 public class Challenge extends AppCompatActivity {
 
-    private int numberPressed=0;
+    private int numberPressed = 0;
     private String question;
     private String answer;
-    private String [] letters;
+    private String[] letters;
     private int maxPresses;
+
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
 
-        question=getIntent().getStringExtra("question");
+        question = getIntent().getStringExtra("question");
         answer = getIntent().getStringExtra("answer");
-        maxPresses=answer.length();
-        letters= new String[answer.length()];
+        maxPresses = answer.length();
+        letters = new String[answer.length()];
 
-        for (int i=0; i<answer.length();i++)
-            letters[i]= answer.charAt(i)+"";
+        for (int i = 0; i < answer.length(); i++)
+            letters[i] = answer.charAt(i) + "";
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.challenge);
         letters = shuffleArray(letters);
 
-        for(String letter: letters){
+        for (String letter : letters) {
             addView((LinearLayout) findViewById(R.id.letters), letter, ((EditText) findViewById(R.id.answerField)));
         }
 
-        TextView questionView =  findViewById(R.id.question);
+        TextView questionView = findViewById(R.id.question);
         questionView.setText(question);// correct place?
     }
 
     private void addView(LinearLayout view, final String letter, final EditText field) {
-        LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-        layout.rightMargin=20;
+        LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layout.rightMargin = 20;
 
         final TextView text = new TextView(this);
         text.setLayoutParams(layout);
@@ -59,26 +60,22 @@ public class Challenge extends AppCompatActivity {
         text.setTextSize(32);
 
 
-        text.setOnClickListener(new View.OnClickListener(){
+        text.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                if (numberPressed < maxPresses){
-                    if (numberPressed ==0)
+            public void onClick(View v) {
+                if (numberPressed < maxPresses) {
+                    if (numberPressed == 0)
                         field.setText("");
 
 
-                    field.setText(field.getText().toString()+ letter);
-                 //   text.startAnimation(bigsmallforth);
+                    field.setText(field.getText().toString() + letter);
+                    //   text.startAnimation(bigsmallforth);
                     text.animate().alpha(0).setDuration(300);
                     numberPressed++;
 
-                        if (numberPressed == maxPresses)
-                            checkAnswer();
-                    }
-
-
-
-
+                    if (numberPressed == maxPresses)
+                        checkAnswer();
+                }
 
 
             }
@@ -88,41 +85,41 @@ public class Challenge extends AppCompatActivity {
     }
 
     private void checkAnswer() {
-        numberPressed=0;
+        numberPressed = 0;
         EditText field = findViewById(R.id.answerField);
         LinearLayout layout = findViewById(R.id.letters);
 
-        if (field.getText().toString().equals(answer)){
-            Intent intent = new Intent(Challenge.this,Win.class);
-            intent.putExtra("coupon",getIntent().getStringExtra("coupon"));
-            intent.putExtra("percentage",getIntent().getStringExtra("percentage"));
+        if (field.getText().toString().equals(answer)) {
+            Intent intent = new Intent(Challenge.this, Win.class);
+            intent.putExtra("coupon", getIntent().getStringExtra("coupon"));
+            intent.putExtra("percentage", getIntent().getStringExtra("percentage"));
             startActivity(intent);
             finish();
-           // field.setText("");
-        }
-        else{
-            Toast.makeText(Challenge.this,"Wrong answer, try again",Toast.LENGTH_SHORT).show();
+            // field.setText("");
+        } else {
+            Toast.makeText(Challenge.this, "Wrong answer, try again", Toast.LENGTH_SHORT).show();
             field.setText("");
 
         }
         letters = shuffleArray(letters);
         layout.removeAllViews();
-        for (String letter: letters){
-            addView(layout,letter,field);
+        for (String letter : letters) {
+            addView(layout, letter, field);
         }
     }
 
     private String[] shuffleArray(String[] letters) {
         Random random = new Random();
-        for (int i=letters.length-1; i>0;i--){
-            int index = random.nextInt(i+1);
+        for (int i = letters.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
             String a = letters[index];
             letters[index] = letters[i];
-            letters[i]=a;
+            letters[i] = a;
         }
 
 
-    return letters;}
+        return letters;
+    }
 
 
 }
