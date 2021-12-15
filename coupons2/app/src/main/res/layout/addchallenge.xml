@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/BackgroundWhite">
+    android:background="@color/BackgroundColor"
+    >
 
     <TextView
         android:id="@+id/AddChallengeTitle"
@@ -13,7 +14,7 @@
         android:layout_gravity="center"
         android:text="Add a new challenge!"
         android:textSize="22sp"
-        android:textColor="@color/t"
+        android:textColor="@color/FirstColor"
         android:textStyle="bold"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="80dp"/>
@@ -31,9 +32,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EnterQuestionField"
-        android:padding="15dp"
-        android:textColor="#332FA2"
-        android:hint="Question"
+        android:padding="10dp"
+        android:textColor="@color/SecondColor"
+        android:hint="Enter your question"
         android:textSize="18sp"
         android:layout_gravity="center"
         android:gravity="center"
@@ -118,15 +119,14 @@
 
 <Button
     android:id="@+id/addButton"
-    android:layout_width="150dp"
+    android:layout_width="350dp"
     android:layout_height="50dp"
     android:layout_marginTop="50dp"
-    android:layout_gravity="center"
     android:background="@drawable/forms_button"
     android:text="Add"
     android:textColor="@color/BackgroundColor"
     android:textSize="18dp"
-    android:textStyle="bold"/>
-
+    android:textStyle="bold"
+    android:layout_gravity="center" />
 </LinearLayout>
 

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coupons.Database;
@@ -23,6 +24,12 @@ public class AddChallenge extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addchallenge);
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         EditText questionField = (EditText) findViewById(R.id.EnterQuestionField);
         EditText answerField = (EditText) findViewById(R.id.EnterAnswerField);
         EditText couponField = (EditText) findViewById(R.id.EnterCouponField);

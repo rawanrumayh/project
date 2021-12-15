@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BackgroundWhite"
+    android:background="@color/BackgroundColor"
     android:orientation="vertical">
     <Button
         android:id="@+id/logout"
@@ -13,14 +13,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:text="switch"
-        android:textColor="#847AB5"/>
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/welcomeOwner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Homepage"
+        android:text="HomePage"
+        android:textColor="@color/FirstColor"
         android:textSize="22sp"
         android:textColor="@color/t"
         android:textStyle="bold"
@@ -30,17 +31,16 @@
         android:id="@+id/yourchallengestitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-    android:layout_gravity="end"
-    android:layout_marginLeft="10dp"
-    android:text="Your challenges"
-    android:textSize="20dp"
-    android:textColor="@color/t"
-    android:textStyle="bold"
-    android:layout_marginTop="50dp"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="Your Challenges"
+        android:textColor="@color/FirstColor"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
- <HorizontalScrollView
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content">
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/ChallengesLayout"
@@ -76,16 +76,17 @@
             android:layout_gravity="bottom">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addFloating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:backgroundTint="@color/BackgroundLBlue"
-        app:tint="@color/BackgroundWhite"/>
+            android:id="@+id/addFloating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="0dp"
+            android:backgroundTint="@color/FirstColor"
+            app:srcCompat="@android:drawable/ic_input_add"
+            app:tint="@color/white" />
         </LinearLayout>
+
     </FrameLayout>
 
 
