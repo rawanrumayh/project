@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -34,6 +33,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".UserMapsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_user_maps" />
+        <activity
             android:name=".user.Win"
             android:exported="false" />
         <activity
@@ -47,13 +50,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data android:name="com.google.android.gms.version"
+
+        <meta-data
+            android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <activity android:name=".user.Challenge" />
         <activity android:name=".owner.OwnerHome" />
         <activity android:name=".user.UserHome" />
         <activity android:name=".owner.AddChallenge" />
-        <receiver android:name=".map.GeofenceBroadcastReceiver"/>
+
+        <receiver android:name=".map.GeofenceBroadcastReceiver" />
     </application>
 
 </manifest>

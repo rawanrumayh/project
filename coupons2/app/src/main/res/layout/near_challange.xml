@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:tag="cards main container">
+    android:tag="cards main container"
+    android:layout_gravity="center">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="180dp"
         android:layout_height="260dp"
+        android:layout_gravity="center"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp"
@@ -18,7 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/imageView"

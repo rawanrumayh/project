@@ -8,12 +8,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Handler;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -26,6 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coupons.Database;
+import com.example.coupons.UserMapsActivity;
 import com.example.coupons.controls.challengeAdapter;
 import com.example.coupons.map.GeofenceHelper;
 import com.example.coupons.map.MapsFragment;
@@ -40,6 +45,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.yayandroid.locationmanager.base.LocationBaseActivity;
 import com.yayandroid.locationmanager.configuration.Configurations;
 import com.yayandroid.locationmanager.configuration.LocationConfiguration;
@@ -47,6 +53,7 @@ import com.yayandroid.locationmanager.configuration.LocationConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 
 public class UserHome extends LocationBaseActivity {
@@ -75,6 +82,24 @@ public class UserHome extends LocationBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_home);
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bnavBar);
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_map:
+                        startActivity(new Intent(getApplicationContext(), UserMapsActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.nav_home:
+                        return true;
+
+                }
+                return false;
+            }
+        });
+
         logout = (Button) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -100,32 +125,83 @@ public class UserHome extends LocationBaseActivity {
 
         dbHelper = new Database(UserHome.this);
 
-        challengesList= new ArrayList<>();
-        recyclerView= (RecyclerView) findViewById(R.id.challengeRV);
+        challengesList = new ArrayList<>();
+        recyclerView = (RecyclerView) findViewById(R.id.challengeRV);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        if (BaseClass.triggeredChallenge != -1 ){
+        if (BaseClass.triggeredChallenge != -1) {
             Log.d("challenge", "there is a close challenge");
             challengesList.add(
                     new challenge_model(
                             BaseClass.triggeredChallenge,
-                        dbHelper.getChallengeQuestion(""+BaseClass.triggeredChallenge),
-                            dbHelper.getChallengeAnswer(""+BaseClass.triggeredChallenge)
+                            dbHelper.getChallengeQuestion("" + BaseClass.triggeredChallenge),
+                            dbHelper.getChallengeAnswer("" + BaseClass.triggeredChallenge)
                     )
             );
 
-            adapter= new challengeAdapter(this, challengesList);
+            adapter = new challengeAdapter(this, challengesList);
             recyclerView.setAdapter(adapter);
         }
+        content();
+
     }
+
+    @SuppressLint("MissingPermission")
+    public void content() {
+
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+        if (location != null) {
+            double lat = location.getLatitude();
+            double longi = location.getLongitude();
+            LatLng latLng = new LatLng(lat, longi);
+            BaseClass.location_saved= true;
+            BaseClass.my_lat= lat;
+            BaseClass.my_lng= longi;
+//            fragment= new MapsFragment();
+//            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
+//            Toast.makeText(UserHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
+        }
+
+        if (BaseClass.triggeredChallenge != -1) {
+            Log.d("challenge", "there is a close challenge");
+            challengesList.clear();
+            challengesList.add(
+                    new challenge_model(
+                            BaseClass.triggeredChallenge,
+                            dbHelper.getChallengeQuestion("" + BaseClass.triggeredChallenge),
+                            dbHelper.getChallengeAnswer("" + BaseClass.triggeredChallenge)
+                    )
+            );
+
+            adapter = new challengeAdapter(UserHome.this, challengesList);
+            recyclerView.setAdapter(adapter);
+        }
+        refresh(1000);
+    }
+
+    private void refresh(int ms) {
+        final Handler hld = new Handler();
+
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                content();
+            }
+        };
+
+        hld.postDelayed(runnable, ms);
+    }
+
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case PERMISSIONS_FINE_LOCATION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    fragment = new MapsFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.map_holder2, fragment).commit();
+//                    fragment = new MapsFragment();
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.map_holder2, fragment).commit();
 
                 } else
                     Toast.makeText(this, "this app was not granted permission", Toast.LENGTH_SHORT).show();
@@ -133,7 +209,7 @@ public class UserHome extends LocationBaseActivity {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getAllGeofences();
                 } else
-                    Toast.makeText(this, "this app was not granted permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "this app was not granted permission1111", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -143,13 +219,16 @@ public class UserHome extends LocationBaseActivity {
 //        Toast.makeText(this, "YESSS", Toast.LENGTH_SHORT).show();
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onLocationChanged(Location location) {
         StringBuilder locationString = new StringBuilder();
         locationString.append("Longitude: " + location.getLongitude());
         locationString.append("\n");
         locationString.append("Latitude: " + location.getLatitude());
-        Log.i(BaseClass.TAG, "location : " + locationString);
+//        Log.i(BaseClass.TAG, "location : " + locationString);
+        BaseClass.my_lng = location.getLongitude();
+        BaseClass.my_lat = location.getLatitude();
 
         try {
             Geocoder geocoder = new Geocoder(UserHome.this, Locale.getDefault());
@@ -157,8 +236,8 @@ public class UserHome extends LocationBaseActivity {
             String address = addresses.get(0).getAddressLine(0);
             BaseClass.my_lng = location.getLongitude();
             BaseClass.my_lat = location.getLatitude();
-            fragment = new MapsFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder2, fragment).commit();
+//            fragment = new MapsFragment();
+//            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder2, fragment).commit();
 
             this.address = address;
             Toast.makeText(this, "address" + address, Toast.LENGTH_LONG).show();
@@ -236,20 +315,19 @@ public class UserHome extends LocationBaseActivity {
     }
 
     private void addGeofence(String id, LatLng latLng, float radius) {
-        Geofence geofence = helper.getGeofence(id, latLng, radius, Geofence.GEOFENCE_TRANSITION_ENTER |  Geofence.GEOFENCE_TRANSITION_DWELL |  Geofence.GEOFENCE_TRANSITION_EXIT);
+        Geofence geofence = helper.getGeofence(id, latLng, radius, Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT);
         GeofencingRequest request = helper.getGeofencenigRequest(geofence);
         PendingIntent pendingIntent = helper.getPendingIntent();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_FINE_LOCATION);
             }
-        }
-        else {
+        } else {
             client.addGeofences(request, pendingIntent).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(@NonNull Void unused) {
 //                    Toast.makeText(UserHome.this, "added", Toast.LENGTH_LONG).show();
-                    if(BaseClass.geofences.add(geofence));
+                    if (BaseClass.geofences.add(geofence)) ;
 //                        Toast.makeText(UserHome.this, "okkkkk", Toast.LENGTH_LONG).show();
 
                 }
