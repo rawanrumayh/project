@@ -114,8 +114,8 @@ public class OwnerHome extends AppCompatActivity {
             BaseClass.location_saved= true;
             BaseClass.my_lat= lat;
             BaseClass.my_lng= longi;
-            fragment= new MapsFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
+//            fragment= new MapsFragment();
+//            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
             Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
         } else {
             setMyLastLocation();
@@ -137,8 +137,8 @@ public class OwnerHome extends AppCompatActivity {
                     LatLng latLng = new LatLng(lat, longi);
                     BaseClass.my_lat= lat;
                     BaseClass.my_lng= longi;
-                    fragment= new MapsFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
+//                    fragment= new MapsFragment();
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
                     Log.d("TAG", "MyLastLocation coordinat :" + latLng);
                     Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_SHORT).show();
 //                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.f));
