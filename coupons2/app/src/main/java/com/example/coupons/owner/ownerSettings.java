@@ -32,7 +32,7 @@ public class ownerSettings extends AppCompatActivity {
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        logout = (Button) findViewById(R.id.oLogoutBtn);
+        logout = (Button) findViewById(R.id.ownerLogout);
         switchMode = (Switch) findViewById(R.id.oSwitchMode);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

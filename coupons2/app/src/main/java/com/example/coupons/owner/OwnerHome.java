@@ -85,15 +85,15 @@ public class OwnerHome extends AppCompatActivity {
         });
 
 
-        logout= (Button) findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                Intent activityChangeIntent = new Intent(OwnerHome.this, UserHome.class);
-                // currentContext.startActivity(activityChangeIntent);
-                OwnerHome.this.startActivity(activityChangeIntent);
-            }
-        });
+//        logout= (Button) findViewById(R.id.logout);
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // Perform action on click
+//                Intent activityChangeIntent = new Intent(OwnerHome.this, UserHome.class);
+//                // currentContext.startActivity(activityChangeIntent);
+//                OwnerHome.this.startActivity(activityChangeIntent);
+//            }
+//        });
 
         updateGPS();
     }

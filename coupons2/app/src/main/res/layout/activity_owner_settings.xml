@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:minHeight="68dp"
         android:text="Silent Mode"
-        app:layout_constraintBottom_toTopOf="@+id/oLogoutBtn"
+        app:layout_constraintBottom_toTopOf="@+id/ownerLogout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.805" />
 
     <Button
-        android:id="@+id/oLogoutBtn"
+        android:id="@+id/ownerLogout"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
