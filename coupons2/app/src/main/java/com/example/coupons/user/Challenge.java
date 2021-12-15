@@ -1,4 +1,4 @@
-package com.example.coupons;
+package com.example.coupons.user;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.coupons.R;
 
 import java.util.Random;
 

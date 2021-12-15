@@ -1,6 +1,4 @@
-package com.example.coupons;
-
-import static java.sql.DriverManager.println;
+package com.example.coupons.owner;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -16,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,16 +24,18 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
+import com.example.coupons.Database;
+import com.example.coupons.map.MapsFragment;
+import com.example.coupons.R;
+import com.example.coupons.globals.BaseClass;
+import com.example.coupons.user.UserHome;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 public class OwnerHome extends AppCompatActivity {
 
@@ -42,6 +43,9 @@ public class OwnerHome extends AppCompatActivity {
     private static final int PERMISSIONS_FINE_LOCATION = 99;
     FusedLocationProviderClient client;
     boolean onUpdate = false;
+    Fragment fragment;
+    Button logout;
+
 
     @SuppressLint("WrongConstant")
     @RequiresApi(api = Build.VERSION_CODES.S)
@@ -78,12 +82,22 @@ public class OwnerHome extends AppCompatActivity {
             }
         });
 
+
+        logout= (Button) findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Intent activityChangeIntent = new Intent(OwnerHome.this, UserHome.class);
+                // currentContext.startActivity(activityChangeIntent);
+                OwnerHome.this.startActivity(activityChangeIntent);
+            }
+        });
+
         updateGPS();
-
-
     }
 
     private void zoomMyCuurentLocation() {
+
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -94,7 +108,11 @@ public class OwnerHome extends AppCompatActivity {
             double lat = location.getLatitude();
             double longi = location.getLongitude();
             LatLng latLng = new LatLng(lat, longi);
-//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.f));
+            BaseClass.location_saved= true;
+            BaseClass.my_lat= lat;
+            BaseClass.my_lng= longi;
+            fragment= new MapsFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
             Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
         } else {
             setMyLastLocation();
@@ -114,6 +132,10 @@ public class OwnerHome extends AppCompatActivity {
                     double lat = location.getLatitude();
                     double longi = location.getLongitude();
                     LatLng latLng = new LatLng(lat, longi);
+                    BaseClass.my_lat= lat;
+                    BaseClass.my_lng= longi;
+                    fragment= new MapsFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
                     Log.d("TAG", "MyLastLocation coordinat :" + latLng);
                     Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_SHORT).show();
 //                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.f));
@@ -136,8 +158,6 @@ public class OwnerHome extends AppCompatActivity {
 
 
     private void updateGPS() {
-        TextView lat = (TextView) findViewById(R.id.lat);
-        lat.setText("heeeereee33333");
         client = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             zoomMyCuurentLocation();

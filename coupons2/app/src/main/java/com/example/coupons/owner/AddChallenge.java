@@ -1,4 +1,4 @@
-package com.example.coupons;
+package com.example.coupons.owner;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -10,6 +10,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.coupons.Database;
+import com.example.coupons.R;
+import com.example.coupons.globals.BaseClass;
 
 public class AddChallenge extends AppCompatActivity {
     String question = "gk", Answer = "kc", coupon = "fkgo";
@@ -64,12 +68,16 @@ public class AddChallenge extends AppCompatActivity {
                     Database databasehelper = new Database(AddChallenge.this);
                     SQLiteDatabase db = databasehelper.getWritableDatabase();
                     ContentValues values = new ContentValues();
+//                    Toast.makeText(AddChallenge.this, ""+BaseClass.my_lat+"22"+BaseClass.my_lng, Toast.LENGTH_SHORT).show();
 
                     values.put(Database.colChallengeQuestion, question);
                     values.put(Database.colChallengeAnswer, Answer);
                     values.put(Database.colChallengeCoupon, coupon);
                     values.put(Database.colChallengeCouponPercentage, percentage);
                     values.put(Database.colOwnerID, 1);
+                    values.put(Database.colOwnerLng, BaseClass.my_lng);
+                    values.put(Database.colOwnerLat, BaseClass.my_lat);
+
 
                     long rowID = db.insert(Database.ChallengesTable, null, values);
                     finish();
