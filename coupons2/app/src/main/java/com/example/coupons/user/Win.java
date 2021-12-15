@@ -1,4 +1,4 @@
-package com.example.coupons;
+package com.example.coupons.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.coupons.R;
+
 public class Win extends AppCompatActivity {
 
     @Override
@@ -15,11 +17,11 @@ public class Win extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_win);
 
-       TextView text= findViewById(R.id.couponField);
-       text.setText(getIntent().getStringExtra("coupon"));
+        TextView text = findViewById(R.id.couponField);
+        text.setText(getIntent().getStringExtra("coupon"));
 
-        TextView coupontitletext= findViewById(R.id.couponTitle);
-        coupontitletext.setText("Your "+getIntent().getStringExtra("percentage")+"% coupon");
+        TextView coupontitletext = findViewById(R.id.couponTitle);
+        coupontitletext.setText("Your " + getIntent().getStringExtra("percentage") + "% coupon");
 
         Button thanks = (Button) findViewById(R.id.thanks);
         thanks.setOnClickListener(new View.OnClickListener() {

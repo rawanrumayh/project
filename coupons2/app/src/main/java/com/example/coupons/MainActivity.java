@@ -2,22 +2,12 @@ package com.example.coupons;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.example.coupons.owner.OwnerHome;
+import com.example.coupons.user.UserHome;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.coupons.databinding.ActivityMainBinding;
-
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,12 +16,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = new Intent(MainActivity.this,Challenge.class);
-        intent.putExtra("percentage","15");
-        intent.putExtra("question","What is the largest continent in the world?");
-        intent.putExtra("answer","ASIA");
-        intent.putExtra("coupon","Enjoy");
-startActivity(intent);
+        try {
+            Intent intent = new Intent(MainActivity.this, OwnerHome.class);
+            intent.putExtra("percentage", "40");
+            intent.putExtra("question", "How are you?");
+            intent.putExtra("answer", "RAWAN");
+            intent.putExtra("coupon", "ME");
+            startActivity(intent);
+        } catch (Exception e){
+            Log.e("MAIN", "ERROR" + e.toString());
+        }
 
     }
 

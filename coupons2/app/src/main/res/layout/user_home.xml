@@ -16,7 +16,7 @@
         android:textColor="#847AB5"/>
 
     <TextView
-        android:id="@+id/welcomeOwner"
+        android:id="@+id/welcomeUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -26,68 +26,67 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/yourchallengestitle"
+        android:id="@+id/nearbyChallenges"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="Your Challenges"
+        android:text="Nearby Challenges"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="297dp">
 
-        <LinearLayout
-            android:id="@+id/ChallengesLayout"
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/ChallengesLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:layout_marginRight="10dp"-->
+        <!--            android:layout_marginBottom="30dp"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:padding="30dp"></LinearLayout>-->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="30dp"
-            android:orientation="horizontal"
-            android:padding="30dp"></LinearLayout>
+            android:layout_marginBottom="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/challengeRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
     </HorizontalScrollView>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="bottom"
         android:layout_marginBottom="70dp"
         >
-
-        <LinearLayout
-            android:id="@+id/map_holder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:ignore="Orientation">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:id="@+id/map_holder2"
+        tools:ignore="Orientation">
 
 
-        </LinearLayout>
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="bottom"
-            >
-
-
-
-        </LinearLayout>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addFloating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="0dp"
-            android:backgroundTint="@color/white"
-            app:srcCompat="@android:drawable/ic_input_add"
-            app:tint="#847AB5" />
-
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        />
     </FrameLayout>
 
 
