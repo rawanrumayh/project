@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/coloredbackground"
+    android:background="@color/BackgroundColor"
     android:orientation="vertical">
     <Button
         android:id="@+id/logout"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:text="switch"
-        android:textColor="#847AB5"/>
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/welcomeOwner"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Welcome"
-        android:textColor="@color/white"
+        android:textColor="@color/FirstColor"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -32,7 +32,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:text="Your Challenges"
-        android:textColor="@color/white"
+        android:textColor="@color/FirstColor"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -84,9 +84,9 @@
             android:layout_gravity="bottom|start"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="0dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/FirstColor"
             app:srcCompat="@android:drawable/ic_input_add"
-            app:tint="#847AB5" />
+            app:tint="@color/white" />
 
     </FrameLayout>
 

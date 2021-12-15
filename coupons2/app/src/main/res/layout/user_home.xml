@@ -7,15 +7,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/coloredbackground"
     android:orientation="vertical">
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="switch"
-        android:textColor="#847AB5"/>
 
     <TextView
+        android:layout_marginTop="50dp"
         android:id="@+id/welcomeUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

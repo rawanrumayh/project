@@ -75,15 +75,15 @@ public class UserHome extends LocationBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_home);
 
-        logout = (Button) findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                Intent activityChangeIntent = new Intent(UserHome.this, OwnerHome.class);
-                // currentContext.startActivity(activityChangeIntent);
-                UserHome.this.startActivity(activityChangeIntent);
-            }
-        });
+//        logout = (Button) findViewById(R.id.logout);
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // Perform action on click
+//                Intent activityChangeIntent = new Intent(UserHome.this, OwnerHome.class);
+//                // currentContext.startActivity(activityChangeIntent);
+//                UserHome.this.startActivity(activityChangeIntent);
+//            }
+//        });
 
 
         client = LocationServices.getGeofencingClient(this);

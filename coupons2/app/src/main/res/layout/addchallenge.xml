@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/coloredbackground">
+    android:background="@color/BackgroundColor"
+    >
 
     <TextView
         android:id="@+id/AddChallengeTitle"
@@ -12,7 +13,7 @@
         android:layout_gravity="center"
         android:text="Add a new challenge!"
         android:textSize="22sp"
-        android:textColor="@color/white"
+        android:textColor="@color/FirstColor"
         android:textStyle="bold"
         android:layout_marginTop="80dp"/>
 
@@ -20,18 +21,19 @@
         android:id="@+id/EnterQuestionTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:gravity="left"
         android:text="Question"
         android:textSize="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/FirstColor"
         android:textStyle="bold"
         android:layout_marginTop="30dp"/>
 
     <EditText
         android:id="@+id/EnterQuestionField"
         android:padding="10dp"
-        android:textColor="#332FA2"
+        android:textColor="@color/SecondColor"
         android:hint="Enter your question"
         android:textSize="18sp"
         android:layout_gravity="center"
@@ -46,11 +48,12 @@
         android:id="@+id/EnterAnswerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:gravity="left"
         android:text="Answer"
         android:textSize="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/FirstColor"
         android:textStyle="bold"
         android:layout_marginTop="10dp"/>
 
@@ -72,11 +75,12 @@
         android:id="@+id/EnterCouponTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:gravity="left"
         android:text="coupon"
         android:textSize="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/FirstColor"
         android:textStyle="bold"
         android:layout_marginTop="10dp"/>
 
@@ -98,11 +102,12 @@
         android:id="@+id/EnterDiscountPercentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:gravity="left"
         android:text="Discount percentage"
         android:textSize="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/FirstColor"
         android:textStyle="bold"
         android:layout_marginTop="20dp"/>
 
@@ -123,11 +128,14 @@
 
 <Button
     android:id="@+id/addButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="350dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="50dp"
+    android:background="@drawable/forms_button"
     android:text="Add"
-    android:textColor="#847AB5"
-    android:layout_gravity="center"
-    android:backgroundTint="@color/white"/>
+    android:textColor="@color/BackgroundColor"
+    android:textSize="18dp"
+    android:textStyle="bold"
+    android:layout_gravity="center" />
 </LinearLayout>
 
