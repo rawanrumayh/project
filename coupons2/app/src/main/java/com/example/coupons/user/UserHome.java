@@ -22,12 +22,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coupons.Database;
+import com.example.coupons.controls.challengeAdapter;
 import com.example.coupons.map.GeofenceHelper;
 import com.example.coupons.map.MapsFragment;
 import com.example.coupons.R;
 import com.example.coupons.globals.BaseClass;
+import com.example.coupons.model.challenge_model;
 import com.example.coupons.owner.OwnerHome;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
@@ -40,6 +44,7 @@ import com.yayandroid.locationmanager.base.LocationBaseActivity;
 import com.yayandroid.locationmanager.configuration.Configurations;
 import com.yayandroid.locationmanager.configuration.LocationConfiguration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -54,6 +59,10 @@ public class UserHome extends LocationBaseActivity {
     GeofencingClient client;
     final int GEOFENCE_RADIUS = 100;
     GeofenceHelper helper;
+    RecyclerView recyclerView;
+    challengeAdapter adapter;
+    List<challenge_model> challengesList;
+    Database dbHelper;
 
 
     @Override
@@ -89,6 +98,25 @@ public class UserHome extends LocationBaseActivity {
             }
         }
 
+        dbHelper = new Database(UserHome.this);
+
+        challengesList= new ArrayList<>();
+        recyclerView= (RecyclerView) findViewById(R.id.challengeRV);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (BaseClass.triggeredChallenge != -1 ){
+            Log.d("challenge", "there is a close challenge");
+            challengesList.add(
+                    new challenge_model(
+                            BaseClass.triggeredChallenge,
+                        dbHelper.getChallengeQuestion(""+BaseClass.triggeredChallenge),
+                            dbHelper.getChallengeAnswer(""+BaseClass.triggeredChallenge)
+                    )
+            );
+
+            adapter= new challengeAdapter(this, challengesList);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -112,7 +140,7 @@ public class UserHome extends LocationBaseActivity {
 
     private void initLocation() {
         getLocation();
-        Toast.makeText(this, "YESSS", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "YESSS", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -222,14 +250,14 @@ public class UserHome extends LocationBaseActivity {
                 public void onSuccess(@NonNull Void unused) {
 //                    Toast.makeText(UserHome.this, "added", Toast.LENGTH_LONG).show();
                     if(BaseClass.geofences.add(geofence));
-                        Toast.makeText(UserHome.this, "okkkkk", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(UserHome.this, "okkkkk", Toast.LENGTH_LONG).show();
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(UserHome.this, "here", Toast.LENGTH_LONG).show();
-                    Log.d("any", e.toString());
+//                    Toast.makeText(UserHome.this, "here", Toast.LENGTH_LONG).show();
+                    Log.d("client.addGeofences", e.toString());
                 }
             });
 

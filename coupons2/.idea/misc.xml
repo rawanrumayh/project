@@ -27,8 +27,9 @@
         <entry key="app/src/main/res/layout/challenge.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/near_challange.xml" value="0.3852618383298551" />
         <entry key="app/src/main/res/layout/ownerhome.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/user_home.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/user_home.xml" value="0.206619522099643" />
       </map>
     </option>
   </component>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.coupons.globals.BaseClass;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
 
@@ -20,20 +21,26 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
             return;
         }
 
+        int geofenceid=-1;
+
         List<Geofence> geofenceList= event.getTriggeringGeofences();
         for(Geofence geofence: geofenceList){
+            geofenceid= Integer.parseInt(geofence.getRequestId());
             Log.d("GEOBROAD", "Challenge ID: "+geofence.getRequestId());
         }
         int transType= event.getGeofenceTransition();
         switch (transType){
             case Geofence.GEOFENCE_TRANSITION_ENTER:
-                Log.d("enteeer","Geofence Triggered");
+                BaseClass.triggeredChallenge= geofenceid;
+                Log.d("ENTER","Geofence Triggered");
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
-                Log.d("Dweeellll","Geofence Triggered222");
+                BaseClass.triggeredChallenge= geofenceid;
+                Log.d("DWELL","Geofence Triggered222");
                 break;
             case Geofence.GEOFENCE_TRANSITION_EXIT:
-                Log.d("exiitttt","Geofence Triggered33333");
+                BaseClass.triggeredChallenge=  -1;
+                Log.d("EXIT","Geofence Triggered33333");
         }
 
     }

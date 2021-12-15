@@ -126,7 +126,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Add"
-    android:textColor="@color/Accent"
+    android:textColor="#847AB5"
     android:layout_gravity="center"
     android:backgroundTint="@color/white"/>
 </LinearLayout>
