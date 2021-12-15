@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Coupons" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/ThirdColor</item>
         <item name="colorPrimaryVariant">@color/primary</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -22,4 +22,18 @@
     <style name="Theme.Coupons.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Coupons.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.WithBar" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/FirstColor</item>
+        <item name="colorPrimaryVariant">@color/FirstColor</item>
+        <item name="colorOnPrimary">@color/BackgroundColor</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/SecondColor</item>
+        <item name="colorSecondaryVariant">@color/SecondColor</item>
+        <item name="colorOnSecondary">@color/ThirdColor</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
 </resources>

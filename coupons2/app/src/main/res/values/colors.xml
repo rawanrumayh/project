@@ -11,4 +11,8 @@
     <color name="primary">#CAC9CF</color>
     <color name="top">#79AA93</color>
     <color name="bg">#D6E4DE</color>
+    <color name="FirstColor">#33678A</color>
+    <color name="BackgroundColor">#EAEFF3</color>
+    <color name="SecondColor">#78A6C9</color>
+    <color name="ThirdColor">#EE5872</color>
 </resources>

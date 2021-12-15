@@ -21,8 +21,15 @@
         <entry key="..\:/Users/rawan/Desktop/uni/level7/444/TryIt/Counter/project/coupons2/app/src/main/res/layout/ownerhome.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/drawable/coloredbackground.xml" value="0.31145833333333334" />
+        <entry key="app/src/main/res/drawable/forms_button.xml" value="0.17685185185185184" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.31145833333333334" />
+        <entry key="app/src/main/res/layout/activity_coffee_owner_sign_up.xml" value="0.2064814814814815" />
+        <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.2064814814814815" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23020833333333332" />
+        <entry key="app/src/main/res/layout/activity_sign_uptype.xml" value="0.2064814814814815" />
+        <entry key="app/src/main/res/layout/activity_user_sign_up.xml" value="0.2064814814814815" />
+        <entry key="app/src/main/res/layout/activity_user_type.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_win.xml" value="0.382051282051282" />
         <entry key="app/src/main/res/layout/addchallenge.xml" value="0.21624730378977441" />
         <entry key="app/src/main/res/layout/challenge.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.23020833333333332" />
@@ -30,6 +37,7 @@
         <entry key="app/src/main/res/layout/near_challange.xml" value="0.3852618383298551" />
         <entry key="app/src/main/res/layout/ownerhome.xml" value="0.25" />
         <entry key="app/src/main/res/layout/user_home.xml" value="0.206619522099643" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.2064814814814815" />
       </map>
     </option>
   </component>
