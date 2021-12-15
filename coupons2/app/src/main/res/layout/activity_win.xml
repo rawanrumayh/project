@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/coloredbackground">
+    android:background="@color/BackgroundColor"
+    >
 
     <TextView
         android:id="@+id/title"
@@ -12,7 +13,7 @@
         android:layout_gravity="center"
         android:text="You did it!"
         android:textSize="22sp"
-        android:textColor="@color/white"
+        android:textColor="@color/FirstColor"
         android:textStyle="bold"
         android:layout_marginTop="70dp"/>
 
@@ -30,7 +31,7 @@
         android:layout_gravity="center"
         android:text="Your coupon"
         android:textSize="22sp"
-        android:textColor="@color/white"
+        android:textColor="@color/FirstColor"
         android:textStyle="bold"
         android:layout_marginTop="50dp"/>
     <EditText
@@ -38,7 +39,7 @@
         android:padding="10dp"
         android:clickable="false"
         android:focusable="false"
-        android:textColor="#332FA2"
+        android:textColor="@color/SecondColor"
         android:textSize="32sp"
         android:layout_gravity="center"
         android:gravity="center"

@@ -1,4 +1,4 @@
-package com.example.coupons;
+package com.example.coupons.owner;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -9,7 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.coupons.Database;
+import com.example.coupons.R;
+import com.example.coupons.globals.BaseClass;
 
 public class AddChallenge extends AppCompatActivity {
     String question = "gk", Answer = "kc", coupon = "fkgo";
@@ -19,6 +24,12 @@ public class AddChallenge extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addchallenge);
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         EditText questionField = (EditText) findViewById(R.id.EnterQuestionField);
         EditText answerField = (EditText) findViewById(R.id.EnterAnswerField);
         EditText couponField = (EditText) findViewById(R.id.EnterCouponField);
@@ -64,18 +75,22 @@ public class AddChallenge extends AppCompatActivity {
                     Database databasehelper = new Database(AddChallenge.this);
                     SQLiteDatabase db = databasehelper.getWritableDatabase();
                     ContentValues values = new ContentValues();
+//                    Toast.makeText(AddChallenge.this, ""+BaseClass.my_lat+"22"+BaseClass.my_lng, Toast.LENGTH_SHORT).show();
 
                     values.put(Database.colChallengeQuestion, question);
                     values.put(Database.colChallengeAnswer, Answer);
                     values.put(Database.colChallengeCoupon, coupon);
                     values.put(Database.colChallengeCouponPercentage, percentage);
-                    values.put(Database.colOwnerID, 1);
+                    values.put(Database.colOwnerID, databasehelper.getCurrentUser());
+                    values.put(Database.colOwnerLng, BaseClass.my_lng);
+                    values.put(Database.colOwnerLat, BaseClass.my_lat);
+
 
                     long rowID = db.insert(Database.ChallengesTable, null, values);
                     finish();
                     startActivity(new Intent(AddChallenge.this, OwnerHome.class));
                     if (rowID == -1)
-                        Toast.makeText(AddChallenge.this, "WWWHHHY", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddChallenge.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                     if (rowID != -1)
                         Toast.makeText(AddChallenge.this, "Challenge added successfully", Toast.LENGTH_SHORT).show();

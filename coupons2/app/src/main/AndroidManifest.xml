@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.coupons">
-
+    package="com.example.coupons" >
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the "MyLocation" functionality.
     -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="AroundU"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Coupons">
-
+        android:theme="@style/Theme.Coupons" >
+        <activity
+            android:name=".owner.ownerSettings"
+            android:exported="true"
+            android:parentActivityName=".owner.OwnerHome"
+            android:theme="@style/Theme.WithBar"
+            />
+        <activity
+            android:name=".user.userSettings"
+            android:exported="true"
+            android:parentActivityName=".user.UserHome"
+            android:theme="@style/Theme.WithBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -33,24 +45,78 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Win"
-            android:exported="false" />
+            android:name=".UserMapsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_user_maps" />
+        <activity
+            android:name=".user.Win"
+            android:exported="false"
+            android:theme="@style/Theme.WithBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Coupons.NoActionBar">
+            android:theme="@style/Theme.Coupons.NoActionBar" >
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".user.Challenge"
+            android:theme="@style/Theme.WithBar" />
+        <activity
+            android:name=".owner.OwnerHome"
+            android:theme="@style/Theme.WithBar" />
+        <activity
+            android:name=".user.UserHome"
+            android:theme="@style/Theme.WithBar" />
+        <activity
+            android:name=".owner.AddChallenge"
+            android:parentActivityName=".owner.OwnerHome"
+            android:theme="@style/Theme.WithBar" />
+
+        <receiver android:name=".map.GeofenceBroadcastReceiver" /> <!-- Added By Deema -->
+        <activity
+            android:name=".logIn"
+            android:exported="true"
+            android:parentActivityName=".SignUP_LogIn"
+            android:theme="@style/Theme.WithBar" />
+        <activity
+            android:name=".user.userSignUp"
+            android:exported="true"
+            android:parentActivityName=".UserType"
+            android:theme="@style/Theme.WithBar" />
+        <activity
+            android:name=".owner.coffeeOwnerSignUp"
+            android:exported="true"
+            android:parentActivityName=".UserType"
+            android:theme="@style/Theme.WithBar" />
+        <activity
+            android:name=".UserType"
+            android:exported="true"
+            android:parentActivityName=".SignUP_LogIn"
+            android:theme="@style/Theme.WithBar" />
+        <activity
+            android:name=".SignUP_LogIn"
+            android:exported="true"
+            android:theme="@style/Theme.WithBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Challenge" />
-        <activity android:name=".OwnerHome" />
-        <activity android:name=".UserHome" />
-        <activity android:name=".AddChallenge" />
-        <receiver android:name=".NotificationReceiver"/>
+
+
 
     </application>
 

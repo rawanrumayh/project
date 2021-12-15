@@ -1,4 +1,4 @@
-package com.example.coupons;
+package com.example.coupons.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.coupons.R;
 
 public class Win extends AppCompatActivity {
 

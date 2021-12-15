@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.coupons.globals.BaseClass;
+
 import com.example.coupons.notifications.NotificationHelper;
 import com.example.coupons.user.Challenge;
 import com.google.android.gms.location.Geofence;
@@ -32,12 +33,19 @@ import androidx.core.app.NotificationManagerCompat;
 //        import com.example.polly.activities.MainActivity;
 //        import com.example.polly.activities.polldetails;
 
+
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingEvent;
+
+
 import java.util.List;
 
 public class GeofenceBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+
         NotificationHelper notificationHelper = new NotificationHelper(context);
+
         GeofencingEvent event= GeofencingEvent.fromIntent(intent);
         if (event.hasError()){
             Log.d("GEOBROAD", "error receive");
@@ -50,7 +58,9 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         for(Geofence geofence: geofenceList){
             geofenceid= Integer.parseInt(geofence.getRequestId());
             Log.d("GEOBROAD", "Challenge ID: "+geofence.getRequestId());
+
             //notificationHelper.sendHighPriorityNotification(challange.class);
+
         }
         int transType= event.getGeofenceTransition();
         switch (transType){
@@ -59,7 +69,6 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
                 Log.d("ENTER","Geofence Triggered");
                 notificationHelper.sendHighPriorityNotification(Challenge.class,geofenceid );
 //                sendNotification(context);
-
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
                 BaseClass.triggeredChallenge= geofenceid;
@@ -106,6 +115,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 //    }
 
 }
+
 
 
 
