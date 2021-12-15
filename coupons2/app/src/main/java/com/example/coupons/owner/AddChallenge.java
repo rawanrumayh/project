@@ -74,7 +74,7 @@ public class AddChallenge extends AppCompatActivity {
                     values.put(Database.colChallengeAnswer, Answer);
                     values.put(Database.colChallengeCoupon, coupon);
                     values.put(Database.colChallengeCouponPercentage, percentage);
-                    values.put(Database.colOwnerID, 1);
+                    values.put(Database.colOwnerID, databasehelper.getCurrentUser());
                     values.put(Database.colOwnerLng, BaseClass.my_lng);
                     values.put(Database.colOwnerLat, BaseClass.my_lat);
 
@@ -83,7 +83,7 @@ public class AddChallenge extends AppCompatActivity {
                     finish();
                     startActivity(new Intent(AddChallenge.this, OwnerHome.class));
                     if (rowID == -1)
-                        Toast.makeText(AddChallenge.this, "WWWHHHY", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddChallenge.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                     if (rowID != -1)
                         Toast.makeText(AddChallenge.this, "Challenge added successfully", Toast.LENGTH_SHORT).show();

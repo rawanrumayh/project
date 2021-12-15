@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/coloredbackground"
+    android:background="@color/BackgroundWhite"
     android:orientation="vertical">
     <Button
         android:id="@+id/logout"
@@ -20,25 +20,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Welcome"
-        android:textColor="@color/white"
+        android:text="Homepage"
         android:textSize="22sp"
-        android:textStyle="bold" />
+        android:textColor="@color/t"
+        android:textStyle="bold"
+        android:layout_marginTop="80dp"/>
 
     <TextView
         android:id="@+id/yourchallengestitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="Your Challenges"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+    android:layout_gravity="end"
+    android:layout_marginLeft="10dp"
+    android:text="Your challenges"
+    android:textSize="20dp"
+    android:textColor="@color/t"
+    android:textStyle="bold"
+    android:layout_marginTop="50dp"/>
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+ <HorizontalScrollView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/ChallengesLayout"
@@ -71,23 +73,19 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_gravity="bottom"
-            >
+            android:layout_gravity="bottom">
 
-
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addFloating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="16dp"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:backgroundTint="@color/BackgroundLBlue"
+        app:tint="@color/BackgroundWhite"/>
         </LinearLayout>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addFloating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="0dp"
-            android:backgroundTint="@color/white"
-            app:srcCompat="@android:drawable/ic_input_add"
-            app:tint="#847AB5" />
-
     </FrameLayout>
 
 

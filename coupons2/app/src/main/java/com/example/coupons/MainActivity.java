@@ -18,10 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             Intent intent = new Intent(MainActivity.this, OwnerHome.class);
-            intent.putExtra("percentage", "40");
-            intent.putExtra("question", "How are you?");
-            intent.putExtra("answer", "RAWAN");
-            intent.putExtra("coupon", "ME");
             startActivity(intent);
         } catch (Exception e){
             Log.e("MAIN", "ERROR" + e.toString());

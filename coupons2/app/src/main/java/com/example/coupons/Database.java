@@ -12,6 +12,7 @@ import com.example.coupons.globals.BaseClass;
 public class Database extends SQLiteOpenHelper {
     static final String DBname = "Database";
     static final int DBversion = 3;
+    static String currentUser;
 
     public static final String ChallengesTable = "Challenges";
     public static final String colChallengeID = "ChallengeID";
@@ -39,7 +40,7 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create Table users(username TEXT primary key, password Text, name TEXT, type TEXT)");
-        db.execSQL("CREATE TABLE " + ChallengesTable + " (" + colChallengeID + "  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL  , " + colChallengeQuestion + " TEXT, " + colChallengeAnswer + " TEXT, " + colChallengeCoupon + " TEXT, " + colOwnerID + " INTEGER, " + colChallengeCouponPercentage + " INTEGER, " + colOwnerLng + " REAL, " + colOwnerLat + " REAL);");
+        db.execSQL("CREATE TABLE " + ChallengesTable + " (" + colChallengeID + "  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL  , " + colChallengeQuestion + " TEXT, " + colChallengeAnswer + " TEXT, " + colChallengeCoupon + " TEXT, " + colOwnerID + " TEXT, " + colChallengeCouponPercentage + " INTEGER, " + colOwnerLng + " REAL, " + colOwnerLat + " REAL);");
     }
 
     public String getChallengeQuestion(String id){
@@ -140,6 +141,7 @@ public class Database extends SQLiteOpenHelper {
             return false;
         }
         else{
+            currentUser = username;
             return true;
         }
 
@@ -160,6 +162,7 @@ public class Database extends SQLiteOpenHelper {
 
         Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[] {username,password});
         if(cursor.getCount()>0){
+            currentUser = username;
             return true;
         }
         else{
@@ -176,5 +179,9 @@ public class Database extends SQLiteOpenHelper {
 
         cursor.close();
         return type;
+    }
+
+    public String getCurrentUser(){
+        return currentUser;
     }
 }

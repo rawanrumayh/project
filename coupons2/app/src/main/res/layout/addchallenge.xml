@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/coloredbackground">
+    android:background="@color/BackgroundWhite">
 
     <TextView
         android:id="@+id/AddChallengeTitle"
@@ -12,122 +13,120 @@
         android:layout_gravity="center"
         android:text="Add a new challenge!"
         android:textSize="22sp"
-        android:textColor="@color/white"
+        android:textColor="@color/t"
         android:textStyle="bold"
-        android:layout_marginTop="80dp"/>
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp"/>
 
-    <TextView
-        android:id="@+id/EnterQuestionTitle"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:text="Question"
-        android:textSize="20dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"/>
-
-    <EditText
+        android:layout_centerInParent="true"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        android:layout_margin="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EnterQuestionField"
-        android:padding="10dp"
+        android:padding="15dp"
         android:textColor="#332FA2"
-        android:hint="Enter your question"
+        android:hint="Question"
         android:textSize="18sp"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/blue"
         android:layout_width="350dp"
         android:layout_height="50dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/EnterAnswerTitle"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:text="Answer"
-        android:textSize="20dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
-
-    <EditText
+        android:layout_centerInParent="true"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        android:layout_margin="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EnterAnswerField"
-        android:padding="10dp"
+        android:layout_marginTop="80dp"
+        android:padding="15dp"
         android:textColor="#332FA2"
-        android:hint="Enter the answer"
+        android:hint="Answer"
         android:textSize="18sp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/blue"
-        android:layout_width="350dp"
-        android:layout_height="50dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/EnterCouponTitle"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:text="coupon"
-        android:textSize="20dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
-
-    <EditText
+        android:layout_centerInParent="true"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        android:layout_margin="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EnterCouponField"
-        android:padding="10dp"
+        android:padding="15dp"
         android:textColor="#332FA2"
-        android:hint="Enter the coupon"
-        android:textSize="18sp"
-        android:layout_gravity="center"
         android:gravity="center"
+        android:hint="Coupon"
+        android:textSize="18sp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/blue"
-        android:layout_width="350dp"
-        android:layout_height="50dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/EnterDiscountPercentage"
-        android:layout_width="wrap_content"
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:text="Discount percentage"
-        android:textSize="20dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"/>
+        android:layout_centerInParent="true"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        android:layout_margin="20dp">
 
-    <EditText
-        android:id="@+id/EnterDiscountField"
-        android:padding="10dp"
-        android:textColor="#332FA2"
-        android:hint="Enter the discount percentage"
-        android:textSize="18sp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/blue"
-        android:layout_width="350dp"
-        android:layout_height="50dp"/>
-
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EnterDiscountField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Percentage"
+            android:padding="10dp"
+            android:textColor="#332FA2"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 <Button
     android:id="@+id/addButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Add"
-    android:textColor="#847AB5"
+    android:layout_width="150dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="50dp"
     android:layout_gravity="center"
-    android:backgroundTint="@color/white"/>
+    android:background="@drawable/forms_button"
+    android:text="Add"
+    android:textColor="@color/BackgroundColor"
+    android:textSize="18dp"
+    android:textStyle="bold"/>
+
 </LinearLayout>
 

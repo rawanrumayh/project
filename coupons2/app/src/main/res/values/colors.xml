@@ -5,8 +5,10 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="t">#57595d</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#EBECF0</color>
     <color name="Accent">#FF4081</color>
     <color name="primary">#CAC9CF</color>
     <color name="top">#79AA93</color>
@@ -15,4 +17,11 @@
     <color name="BackgroundColor">#EAEFF3</color>
     <color name="SecondColor">#78A6C9</color>
     <color name="ThirdColor">#EE5872</color>
+    <color name="BackgroundWhite">#edeef2</color>
+    <color name="BackgroundCard">#d5dbf4</color>
+    <color name="BackgroundLBlue">#78A6C9</color>
+    <color name="BackgroundDBlue">#33678A</color>
+    <color name="BackgroundRed">#E65C4F</color>
+    //EAEFF3
+>>>>>>> Stashed changes
 </resources>
