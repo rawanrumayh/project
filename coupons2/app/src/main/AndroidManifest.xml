@@ -20,12 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coupons" >
         <activity
-            android:name=".owner.ownerSettings"
-            android:exported="true"
-            android:parentActivityName=".owner.OwnerHome"
-            android:theme="@style/Theme.WithBar"
-            />
-        <activity
             android:name=".user.userSettings"
             android:exported="true"
             android:parentActivityName=".user.UserHome"
