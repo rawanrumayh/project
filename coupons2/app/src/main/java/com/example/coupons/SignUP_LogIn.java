@@ -16,7 +16,7 @@ public class SignUP_LogIn extends AppCompatActivity {
 
         // calling the action bar
         ActionBar actionBar = getSupportActionBar();
-
+        actionBar.hide();
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(false);
     }
