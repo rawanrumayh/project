@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
    <item
-      android:id="@+id/logout"
+      android:id="@+id/uSettings"
       android:icon="@drawable/settings"
        app:showAsAction="always"
        android:title="Logout"

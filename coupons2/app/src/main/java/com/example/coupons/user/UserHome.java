@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -33,6 +35,8 @@ import com.example.coupons.R;
 import com.example.coupons.globals.BaseClass;
 import com.example.coupons.model.challenge_model;
 import com.example.coupons.owner.OwnerHome;
+import com.example.coupons.ownerSettings;
+import com.example.coupons.userSettings;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
@@ -262,5 +266,23 @@ public class UserHome extends LocationBaseActivity {
             });
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.user_bar,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.uSettings:
+                Intent i = new Intent(getApplicationContext(), userSettings.class);
+                startActivity(i);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -13,6 +13,8 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -30,6 +32,8 @@ import com.example.coupons.Database;
 import com.example.coupons.map.MapsFragment;
 import com.example.coupons.R;
 import com.example.coupons.globals.BaseClass;
+import com.example.coupons.ownerSettings;
+import com.example.coupons.userSettings;
 import com.example.coupons.user.UserHome;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -269,4 +273,21 @@ public class OwnerHome extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.owner_bar,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.oSettings:
+                Intent i = new Intent(getApplicationContext(), ownerSettings.class);
+                startActivity(i);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
