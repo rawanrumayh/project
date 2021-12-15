@@ -34,7 +34,7 @@
         android:id="@+id/EnterQuestionField"
         android:padding="10dp"
         android:textColor="@color/SecondColor"
-        android:hint="Enter your question"
+        android:hint="Question"
         android:textSize="18sp"
         android:layout_gravity="center"
         android:gravity="center"
@@ -59,7 +59,7 @@
         android:id="@+id/EnterAnswerField"
         android:layout_marginTop="80dp"
         android:padding="15dp"
-        android:textColor="#332FA2"
+        android:textColor="@color/SecondColor"
         android:hint="Answer"
         android:textSize="18sp"
         android:layout_gravity="center"
@@ -83,7 +83,7 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EnterCouponField"
         android:padding="15dp"
-        android:textColor="#332FA2"
+        android:textColor="@color/SecondColor"
         android:gravity="center"
         android:hint="Coupon"
         android:textSize="18sp"
@@ -113,7 +113,7 @@
             android:gravity="center"
             android:hint="Percentage"
             android:padding="10dp"
-            android:textColor="#332FA2"
+            android:textColor="@color/SecondColor"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
