@@ -29,6 +29,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.coupons.Database;
+import com.example.coupons.SignUP_LogIn;
 import com.example.coupons.map.MapsFragment;
 import com.example.coupons.R;
 import com.example.coupons.globals.BaseClass;
@@ -245,10 +246,10 @@ public class OwnerHome extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
-            case R.id.oSettings:
-                Intent i = new Intent(getApplicationContext(), ownerSettings.class);
+            case R.id.OwnerLogout:
+                Toast.makeText(OwnerHome.this,"Logged out Successfully",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), SignUP_LogIn.class);
                 startActivity(i);
-                return true;
         }
         return super.onOptionsItemSelected(item);
     }

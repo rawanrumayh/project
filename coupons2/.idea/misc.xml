@@ -16,41 +16,23 @@
         <entry key="..\:/Users/rawan/AndroidStudioProjects/coupons2/app/src/main/res/layout/fragment_first.xml" value="0.17708333333333334" />
         <entry key="..\:/Users/rawan/AndroidStudioProjects/coupons2/app/src/main/res/layout/game.xml" value="0.17708333333333334" />
         <entry key="..\:/Users/rawan/AndroidStudioProjects/coupons2/app/src/main/res/layout/ownerhome.xml" value="0.18206521739130435" />
-        <entry key="..\:/Users/rawan/Desktop/uni/level7/444/TryIt/Counter/project/coupons2/app/src/main/res/drawable/border.xml" value="0.13194444444444445" />
-        <entry key="..\:/Users/rawan/Desktop/uni/level7/444/TryIt/Counter/project/coupons2/app/src/main/res/drawable/coloredbackground.xml" value="0.1" />
-        <entry key="..\:/Users/rawan/Desktop/uni/level7/444/TryIt/Counter/project/coupons2/app/src/main/res/layout/activity_coffee_owner_sign_up.xml" value="0.15942028985507245" />
-        <entry key="..\:/Users/rawan/Desktop/uni/level7/444/TryIt/Counter/project/coupons2/app/src/main/res/layout/activity_log_in.xml" value="0.15942028985507245" />
-        <entry key="..\:/Users/rawan/Desktop/uni/level7/444/TryIt/Counter/project/coupons2/app/src/main/res/layout/activity_main.xml" value="0.15942028985507245" />
-        <entry key="..\:/Users/rawan/Desktop/uni/level7/444/TryIt/Counter/project/coupons2/app/src/main/res/layout/activity_sign_uptype.xml" value="0.15942028985507245" />
         <entry key="..\:/Users/rawan/Desktop/uni/level7/444/TryIt/Counter/project/coupons2/app/src/main/res/layout/addchallenge.xml" value="0.1175925925925926" />
         <entry key="..\:/Users/rawan/Desktop/uni/level7/444/TryIt/Counter/project/coupons2/app/src/main/res/layout/challenge.xml" value="0.16757246376811594" />
         <entry key="..\:/Users/rawan/Desktop/uni/level7/444/TryIt/Counter/project/coupons2/app/src/main/res/layout/ownerhome.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/drawable/coloredbackground.xml" value="0.31145833333333334" />
-        <entry key="app/src/main/res/drawable/forms_button.xml" value="0.17685185185185184" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.31145833333333334" />
-        <entry key="app/src/main/res/layout/action_bar.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/activity_coffee_owner_sign_up.xml" value="0.2064814814814815" />
-        <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.2064814814814815" />
+        <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23020833333333332" />
-        <entry key="app/src/main/res/layout/activity_owner_settings.xml" value="0.34102564102564104" />
-        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.34102564102564104" />
-        <entry key="app/src/main/res/layout/activity_sign_uptype.xml" value="0.2064814814814815" />
-        <entry key="app/src/main/res/layout/activity_user_sign_up.xml" value="0.2064814814814815" />
-        <entry key="app/src/main/res/layout/activity_user_type.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_win.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/addchallenge.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/app_title.xml" value="0.36041666666666666" />
-        <entry key="app/src/main/res/layout/challenge.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.2101851851851852" />
+        <entry key="app/src/main/res/layout/addchallenge.xml" value="0.21624730378977441" />
+        <entry key="app/src/main/res/layout/challenge.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.1" />
         <entry key="app/src/main/res/layout/near_challange.xml" value="0.3852618383298551" />
         <entry key="app/src/main/res/layout/ownerhome.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/user_home.xml" value="0.21560152563481186" />
-        <entry key="app/src/main/res/menu/app_bar.xml" value="0.25832864178301834" />
-        <entry key="app/src/main/res/menu/menu_main.xml" value="0.2064814814814815" />
-        <entry key="app/src/main/res/menu/owner_bar.xml" value="0.22870370370370371" />
-        <entry key="app/src/main/res/menu/user_bar.xml" value="0.3548717948717949" />
+        <entry key="app/src/main/res/layout/user_home.xml" value="0.206619522099643" />
+        <entry key="app/src/main/res/menu/user_bar.xml" value="0.2101851851851852" />
       </map>
     </option>
   </component>
