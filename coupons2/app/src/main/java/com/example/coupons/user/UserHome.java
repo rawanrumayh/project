@@ -16,7 +16,6 @@ import android.location.Geocoder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
@@ -34,9 +33,6 @@ import com.example.coupons.map.MapsFragment;
 import com.example.coupons.R;
 import com.example.coupons.globals.BaseClass;
 import com.example.coupons.model.challenge_model;
-import com.example.coupons.owner.OwnerHome;
-import com.example.coupons.ownerSettings;
-import com.example.coupons.userSettings;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
@@ -51,7 +47,6 @@ import com.yayandroid.locationmanager.configuration.LocationConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 public class UserHome extends LocationBaseActivity {
     private static final int PERMISSIONS_FINE_LOCATION = 99;

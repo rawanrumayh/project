@@ -1,4 +1,4 @@
-package com.example.coupons;
+package com.example.coupons.owner;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import com.example.coupons.R;
+import com.example.coupons.SignUP_LogIn;
 
 public class ownerSettings extends AppCompatActivity {
     Button logout;

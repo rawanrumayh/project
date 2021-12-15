@@ -1,4 +1,4 @@
-package com.example.coupons;
+package com.example.coupons.owner;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.coupons.owner.OwnerHome;
+import com.example.coupons.Database;
+import com.example.coupons.R;
 
 public class coffeeOwnerSignUp extends AppCompatActivity {
 EditText coffeeName,userName,password,repassword;

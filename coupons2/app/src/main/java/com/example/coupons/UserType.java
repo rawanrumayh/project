@@ -7,6 +7,9 @@ import android.view.View;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.coupons.owner.coffeeOwnerSignUp;
+import com.example.coupons.user.userSignUp;
+
 public class UserType extends AppCompatActivity {
 
     @Override
@@ -21,12 +24,12 @@ public class UserType extends AppCompatActivity {
     }
 
     public void toCoffeeOwner(View view){
-        Intent i = new Intent(this,coffeeOwnerSignUp.class);
+        Intent i = new Intent(this, coffeeOwnerSignUp.class);
         startActivity(i);
     }
 
     public void toUser(View view){
-        Intent i = new Intent(this,userSignUp.class);
+        Intent i = new Intent(this, userSignUp.class);
         startActivity(i);
     }
 }

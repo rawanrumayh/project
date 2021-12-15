@@ -32,8 +32,6 @@ import com.example.coupons.Database;
 import com.example.coupons.map.MapsFragment;
 import com.example.coupons.R;
 import com.example.coupons.globals.BaseClass;
-import com.example.coupons.ownerSettings;
-import com.example.coupons.userSettings;
 import com.example.coupons.user.UserHome;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
