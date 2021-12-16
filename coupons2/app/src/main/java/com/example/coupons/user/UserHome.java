@@ -156,8 +156,9 @@ public class UserHome extends AppCompatActivity {
             while (cursor.moveToNext()) {
                 @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(Database.colChallengeID));
                 if (dbHelper.getChallengeLng(id) == BaseClass.my_lng && dbHelper.getChallengeLat(id) == BaseClass.my_lat) {
-                    nHelper.sendHighPriorityNotification("Around U!", "Play and Earn your Coupon!", UserHome.class);
-                    AddView(id);
+                    if (!BaseClass.played.contains(id)){
+                        nHelper.sendHighPriorityNotification("Around U!", "Play and Earn your Coupon!", UserHome.class);
+                    AddView(id);}
                 }
             }
         }
@@ -170,6 +171,8 @@ public class UserHome extends AppCompatActivity {
 
 
     public void content3() {
+        Challengeslayout.removeAllViews();
+
         Challengeslayout = (LinearLayout) findViewById(R.id.ChallengesLayout);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colChallengeID},
@@ -180,8 +183,9 @@ public class UserHome extends AppCompatActivity {
             while (cursor.moveToNext()) {
                 @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(Database.colChallengeID));
                 if (dbHelper.getChallengeLng(id) == BaseClass.my_lng && dbHelper.getChallengeLat(id) == BaseClass.my_lat) {
+                    if (!BaseClass.played.contains(id)){
                     nHelper.sendHighPriorityNotification("Around U!", "Play and Earn your Coupon!", UserHome.class);
-                    AddView(id);
+                    AddView(id);}
                 }
             }
         }

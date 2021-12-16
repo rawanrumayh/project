@@ -13,6 +13,7 @@ public class BaseClass extends Application {
     public static double my_lng = 0.0;
     public static final String TAG = "MYSMTH";
     public static List<Geofence> geofences= new ArrayList<>();
+    public static List<String> played= new ArrayList<>();
     public static int triggeredChallenge = -1;
     public static String address;
 
