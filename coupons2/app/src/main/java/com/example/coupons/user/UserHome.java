@@ -152,7 +152,6 @@ public class UserHome extends AppCompatActivity {
                 @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(Database.colChallengeID));
                 if (dbHelper.getChallengeLng(id) == BaseClass.my_lng && dbHelper.getChallengeLat(id) == BaseClass.my_lat) {
                     nHelper.sendHighPriorityNotification("Around U!", "Play and Earn your Coupon!", UserHome.class);
-                    Toast.makeText(this, "did find", Toast.LENGTH_SHORT).show();
                     AddView(id);
                 }
             }
@@ -176,7 +175,6 @@ public class UserHome extends AppCompatActivity {
                 @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(Database.colChallengeID));
                 if (dbHelper.getChallengeLng(id) == BaseClass.my_lng && dbHelper.getChallengeLat(id) == BaseClass.my_lat) {
                     nHelper.sendHighPriorityNotification("Around U!", "Play and Earn your Coupon!", UserHome.class);
-                    Toast.makeText(this, "did find", Toast.LENGTH_SHORT).show();
                     AddView(id);
                 }
             }
