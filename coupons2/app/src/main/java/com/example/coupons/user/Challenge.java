@@ -100,6 +100,7 @@ public class Challenge extends AppCompatActivity {
             intent.putExtra("coupon", db.getChallengeCoupon(challengeID));
             intent.putExtra("percentage", db.getChallengeCouponP(challengeID));
             intent.putExtra("owner", db.getChallengeOwner(challengeID));
+            intent.putExtra("id", challengeID);
             startActivity(intent);
             finish();
             // field.setText("");

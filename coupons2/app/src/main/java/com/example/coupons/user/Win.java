@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.coupons.R;
+import com.example.coupons.globals.BaseClass;
 
 public class Win extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class Win extends AppCompatActivity {
         thanks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BaseClass.played.add(getIntent().getStringExtra("id"));
                 finish();
                 startActivity(new Intent(Win.this, UserHome.class)); //change it
             }
