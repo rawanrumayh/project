@@ -27,7 +27,6 @@ public class Win extends AppCompatActivity {
         thanks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 startActivity(new Intent(Win.this, UserHome.class)); //change it
             }
         });

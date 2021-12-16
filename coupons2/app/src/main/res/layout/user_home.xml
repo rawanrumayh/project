@@ -5,23 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/coloredbackground"
+    android:background="@color/BackgroundColor"
     android:orientation="vertical">
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="switch"
-        android:textColor="#847AB5"/>
 
     <TextView
+        android:layout_marginTop="50dp"
         android:id="@+id/welcomeUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Welcome"
-        android:textColor="@color/white"
+        android:textColor="@color/FirstColor"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -31,14 +25,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="Nearby Challenges"
-        android:textColor="@color/white"
+        android:text="NEARBY CHALLENGE"
+        android:textColor="@color/SecondColor"
         android:textSize="20dp"
         android:textStyle="bold" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="297dp">
+        android:layout_height="430dp">
 
         <!--        <LinearLayout-->
         <!--            android:id="@+id/ChallengesLayout"-->
@@ -53,7 +47,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_gravity="center"
-            android:layout_height="match_parent"
+            android:layout_height="430dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
@@ -62,7 +56,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/challengeRV"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
 
@@ -70,24 +64,31 @@
         </RelativeLayout>
     </HorizontalScrollView>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="70dp"
-        >
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" android:id="@+id/map_holder2"
-        tools:ignore="Orientation">
+        android:layout_height="match_parent">
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="bottom"
+            android:elevation="2dp"
+            app:menu="@menu/item_menu"
+            android:background="@drawable/round_corner"
+            app:itemIconTint="@drawable/item_selector"
+            app:itemRippleColor="@android:color/transparent"
+            app:itemIconSize="30dp"
+            app:labelVisibilityMode="unlabeled"
+            android:id="@+id/bnavBar"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        />
-    </FrameLayout>
 
 
 </LinearLayout>

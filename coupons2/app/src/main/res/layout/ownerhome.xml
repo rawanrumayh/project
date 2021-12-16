@@ -5,25 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/coloredbackground"
+    android:background="@color/BackgroundColor"
     android:orientation="vertical">
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="switch"
-        android:textColor="#847AB5"/>
 
     <TextView
         android:id="@+id/welcomeOwner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Welcome"
-        android:textColor="@color/white"
+        android:text="HomePage"
+        android:textColor="@color/FirstColor"
         android:textSize="22sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="80dp"/>
 
     <TextView
         android:id="@+id/yourchallengestitle"
@@ -32,7 +26,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:text="Your Challenges"
-        android:textColor="@color/white"
+        android:textColor="@color/FirstColor"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -71,22 +65,19 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_gravity="bottom"
-            >
+            android:layout_gravity="bottom">
 
-
-
-        </LinearLayout>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addFloating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="0dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/FirstColor"
             app:srcCompat="@android:drawable/ic_input_add"
-            app:tint="#847AB5" />
+            app:tint="@color/white" />
+        </LinearLayout>
 
     </FrameLayout>
 

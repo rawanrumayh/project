@@ -11,6 +11,10 @@ public class challenge_model {
         this.answer = answer;
     }
 
+    public challenge_model() {
+
+    }
+
     public int getId() {
         return id;
     }

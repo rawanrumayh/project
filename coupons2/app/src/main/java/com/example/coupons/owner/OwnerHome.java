@@ -13,6 +13,8 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -27,6 +29,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.coupons.Database;
+import com.example.coupons.SignUP_LogIn;
 import com.example.coupons.map.MapsFragment;
 import com.example.coupons.R;
 import com.example.coupons.globals.BaseClass;
@@ -58,7 +61,7 @@ public class OwnerHome extends AppCompatActivity {
         Database dbHelper = new Database(OwnerHome.this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colChallengeQuestion, Database.colChallengeAnswer, Database.colChallengeCoupon, Database.colChallengeCouponPercentage},
-                "Owner=?", new String[]{"1"}, null, null, null); //selection
+                "Owner=?", new String[]{dbHelper.getCurrentUser()}, null, null, null); //selection
 
 
         // intent id
@@ -83,15 +86,15 @@ public class OwnerHome extends AppCompatActivity {
         });
 
 
-        logout= (Button) findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                Intent activityChangeIntent = new Intent(OwnerHome.this, UserHome.class);
-                // currentContext.startActivity(activityChangeIntent);
-                OwnerHome.this.startActivity(activityChangeIntent);
-            }
-        });
+//        logout= (Button) findViewById(R.id.logout);
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // Perform action on click
+//                Intent activityChangeIntent = new Intent(OwnerHome.this, UserHome.class);
+//                // currentContext.startActivity(activityChangeIntent);
+//                OwnerHome.this.startActivity(activityChangeIntent);
+//            }
+//        });
 
         updateGPS();
     }
@@ -111,9 +114,9 @@ public class OwnerHome extends AppCompatActivity {
             BaseClass.location_saved= true;
             BaseClass.my_lat= lat;
             BaseClass.my_lng= longi;
-            fragment= new MapsFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
-            Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
+//            fragment= new MapsFragment();
+//            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
+//            Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
         } else {
             setMyLastLocation();
         }
@@ -134,10 +137,10 @@ public class OwnerHome extends AppCompatActivity {
                     LatLng latLng = new LatLng(lat, longi);
                     BaseClass.my_lat= lat;
                     BaseClass.my_lng= longi;
-                    fragment= new MapsFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
+//                    fragment= new MapsFragment();
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
                     Log.d("TAG", "MyLastLocation coordinat :" + latLng);
-                    Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_SHORT).show();
 //                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.f));
                 }
             }
@@ -171,57 +174,56 @@ public class OwnerHome extends AppCompatActivity {
 
     private void AddView(String question, String answer, String coupon, String percentage) {
         LinearLayout Challengeslayout = (LinearLayout) findViewById(R.id.ChallengesLayout);
-        LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layout.rightMargin = 10;
-        layout.leftMargin = 10;
-        layout.topMargin = 10;
-        layout.bottomMargin = 20;
+        LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        layout.rightMargin=10; layout.leftMargin=10; layout.topMargin=10; layout.bottomMargin=20;
         Challengeslayout.setOrientation(LinearLayout.HORIZONTAL);
 
 
+
+
         TextView questionTV = new TextView(this);
-        questionTV.setText("Question:");
-        questionTV.setPadding(10, 10, 10, 10);
+        questionTV.setText("Question");
+        questionTV.setPadding(10,10,10,10);
         questionTV.setTypeface(Typeface.DEFAULT_BOLD);
 
         TextView questionV = new TextView(this);
         questionV.setText(question);
-        questionV.setPadding(10, 60, 10, 10);
+        questionV.setPadding(10,60,10,10);
 
         TextView answerTV = new TextView(this);
-        answerTV.setText("Answer:");
-        answerTV.setPadding(10, 160, 10, 10);
+        answerTV.setText("Answer");
+        answerTV.setPadding(10,160,10,10);
         answerTV.setTypeface(Typeface.DEFAULT_BOLD);
 
         TextView answerV = new TextView(this);
         answerV.setText(answer);
-        answerV.setPadding(10, 210, 10, 10);
+        answerV.setPadding(10,210,10,10);
 
         TextView couponTV = new TextView(this);
-        couponTV.setText("Coupon:");
-        couponTV.setPadding(10, 300, 10, 10);
+        couponTV.setText("Coupon");
+        couponTV.setPadding(10,300,10,10);
         couponTV.setTypeface(Typeface.DEFAULT_BOLD);
 
         TextView couponV = new TextView(this);
         couponV.setText(coupon);
-        couponV.setPadding(10, 360, 10, 10);
+        couponV.setPadding(10,360,10,10);
 
         TextView PercTV = new TextView(this);
-        PercTV.setText("Percentage:");
-        PercTV.setPadding(10, 430, 10, 10);
+        PercTV.setText("Percentage");
+        PercTV.setPadding(10,430,10,10);
         PercTV.setTypeface(Typeface.DEFAULT_BOLD);
 
         TextView percV = new TextView(this);
-        percV.setText(percentage + "%");
-        percV.setPadding(300, 430, 10, 10);
+        percV.setText(percentage+"%");
+        percV.setPadding(300,430,10,10);
 
 
         CardView card = new CardView(this);
-        card.setCardBackgroundColor(getResources().getColor(R.color.white));
+        card.setCardBackgroundColor(getResources().getColor(R.color.BackgroundCard));
         card.setRadius(10);
         card.setLayoutParams(layout);
         card.setCardElevation(20);
-        card.setContentPadding(20, 30, 20, 30);
+        card.setContentPadding(20,30,20,30);
         card.addView(questionTV);
         card.addView(questionV);
         card.addView(answerTV);
@@ -232,41 +234,23 @@ public class OwnerHome extends AppCompatActivity {
         card.addView(percV);
         Challengeslayout.addView(card);
 
-       /* LinearLayout ChallengeLayout = new LinearLayout(this);
-        LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-        layout.rightMargin=20;
-
-
-        final TextView text = new TextView(this);
-        text.setLayoutParams(layout);
-        text.setBackground(this.getResources().getDrawable(R.drawable.pink));
-        text.setTextColor(this.getResources().getColor(R.color.purple_700)); // purple
-        text.setGravity(Gravity.CENTER);
-        text.setText(question);
-        text.setTextSize(22);
-        ChallengeLayout.addView(text);
-
-       layout.setBackground(getDrawable(R.drawable.blue));
-        TextView questionView = new TextView(this);
-        questionView.setText(question);
-
-
-        TextView answerView = new TextView(this);
-        answerView.setText(answer);
-
-        TextView couponView = new TextView(this);
-        couponView.setText(coupon);
-
-        TextView percentageView = new TextView(this);
-        percentageView.setText(percentage);
-
-        ChallengeLayout.addView(questionView);
-        ChallengeLayout.addView(answerView);
-        ChallengeLayout.addView(couponView);
-        ChallengeLayout.addView(percentageView);
-        Challengeslayout.addView(ChallengeLayout);*/
-
-
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.owner_bar,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.OwnerLogout:
+                Toast.makeText(OwnerHome.this,"Logged out Successfully",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), SignUP_LogIn.class);
+                startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
