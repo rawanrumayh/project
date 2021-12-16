@@ -30,6 +30,7 @@ public class UserMapsActivity extends FragmentActivity implements OnMapReadyCall
 
         setContentView(R.layout.activity_user_maps);
 
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bnavBar);
         bottomNavigationView.setSelectedItemId(R.id.nav_map);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
