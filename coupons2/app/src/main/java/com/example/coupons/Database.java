@@ -6,12 +6,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.location.Location;
 
 import com.example.coupons.globals.BaseClass;
+import com.example.coupons.model.challenge_model;
+
+import java.util.ArrayList;
 
 public class Database extends SQLiteOpenHelper {
     static final String DBname = "Database";
-    static final int DBversion = 3;
+    static final int DBversion = 4;
     static String currentUser;
 
     public static final String ChallengesTable = "Challenges";
@@ -88,6 +92,40 @@ public class Database extends SQLiteOpenHelper {
             while (cursor.moveToNext()) {
                 @SuppressLint("Range") String coupon = cursor.getString(cursor.getColumnIndex(Database.colChallengeCoupon));
                 value= coupon;
+            }
+        }
+        cursor.close();
+        return value;
+    }
+
+    public String getChallengeLat(String id){
+        String value="";
+        SQLiteDatabase db= this.getReadableDatabase();
+        Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colOwnerLat},
+                "ChallengeID=?", new String[]{id}, null, null, null); //selection
+
+        // intent id
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") String lat = cursor.getString(cursor.getColumnIndex(Database.colOwnerLat));
+                value= lat;
+            }
+        }
+        cursor.close();
+        return value;
+    }
+
+    public String getChallengeLng(String id){
+        String value="";
+        SQLiteDatabase db= this.getReadableDatabase();
+        Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colOwnerLng},
+                "ChallengeID=?", new String[]{id}, null, null, null); //selection
+
+        // intent id
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") String lat = cursor.getString(cursor.getColumnIndex(Database.colOwnerLng));
+                value= lat;
             }
         }
         cursor.close();
@@ -184,4 +222,52 @@ public class Database extends SQLiteOpenHelper {
     public String getCurrentUser(){
         return currentUser;
     }
+
+    public ArrayList<challenge_model> getNearestChallenge(Location userLocation) {
+
+        String lat= ""+BaseClass.my_lat;
+        String lng= ""+BaseClass.my_lng;
+
+        ArrayList<challenge_model> challenges = new ArrayList<>();
+
+        Cursor cursor = readAllData();
+        if (cursor.getCount() == 0) {
+            return challenges;
+
+        } else {
+
+            while (cursor.moveToNext()) {
+
+                if (cursor.getString(3) != null) {
+                    if (lat.equals(""+cursor.getFloat(7)) && lng.equals(""+cursor.getFloat(6))) {
+                        challenge_model challenge = new challenge_model();
+                        challenge.setId(Integer.parseInt(cursor.getString(0)));
+                        challenge.setAnswer(cursor.getString(2));
+                        challenge.setQuestion(cursor.getString(1));
+
+                        challenges.add(challenge);
+                    }
+                }
+            }
+        }
+
+        return challenges;
+    }
+
+    public Cursor readAllData() {
+
+
+        // String query = "SELECT * FROM poll where Usernamee=?\",new String[]{UserName}";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+
+            cursor = db.rawQuery("Select * from Challenges ", null);
+
+        }
+        return cursor;
+    }
+
+
 }

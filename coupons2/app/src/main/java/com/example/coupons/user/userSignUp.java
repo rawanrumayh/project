@@ -51,7 +51,7 @@ public class userSignUp extends AppCompatActivity {
                 }
                 else {
                     if(pass.equals(rePass)){
-                        Boolean checkUser = DB.checkUsername(uUsername);
+                        Boolean checkUser = false;
 
                         if(checkUser == false){
                             Boolean insert = DB.register( uUsername, pass, uName,"user");
