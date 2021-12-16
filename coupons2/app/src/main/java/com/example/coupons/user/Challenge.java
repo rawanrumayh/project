@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.coupons.Database;
 import com.example.coupons.R;
 
 import java.util.Random;
@@ -24,15 +23,12 @@ public class Challenge extends AppCompatActivity {
     private String answer;
     private String[] letters;
     private int maxPresses;
-    private String challengeID;
-    Database db = new Database(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
- challengeID = getIntent().getStringExtra("id");
 
-        question = db.getChallengeQuestion(challengeID);
-        answer = db.getChallengeAnswer(challengeID);
+        question = getIntent().getStringExtra("question");
+        answer = getIntent().getStringExtra("answer");
         maxPresses = answer.length();
         letters = new String[answer.length()];
 
@@ -97,8 +93,8 @@ public class Challenge extends AppCompatActivity {
 
         if (field.getText().toString().equals(answer)) {
             Intent intent = new Intent(Challenge.this, Win.class);
-            intent.putExtra("coupon", db.getChallengeCoupon(challengeID));
-            intent.putExtra("percentage", db.getChallengeCoupon(challengeID) );
+            intent.putExtra("coupon", getIntent().getStringExtra("coupon"));
+            intent.putExtra("percentage", getIntent().getStringExtra("percentage"));
             startActivity(intent);
             finish();
             // field.setText("");

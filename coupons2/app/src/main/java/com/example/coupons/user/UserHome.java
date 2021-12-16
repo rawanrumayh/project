@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -26,9 +27,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coupons.Database;
@@ -49,23 +52,16 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.List;
-
 public class UserHome extends AppCompatActivity {
     private static final int PERMISSIONS_FINE_LOCATION = 99;
     private static final int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 170;
-    private ProgressDialog progressDialog;
     private String address = "";
     GeofencingClient client;
     final int GEOFENCE_RADIUS = 100;
     GeofenceHelper helper;
-    RecyclerView recyclerView;
-    challengeAdapter adapter;
-    List<challenge_model> challengesList;
     Database dbHelper;
     NotificationHelper nHelper;
     FusedLocationProviderClient client2;
-    double curlat, curlng;
 
 
     @Override
@@ -77,8 +73,34 @@ public class UserHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_home);
-
         nHelper = new NotificationHelper(this);
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+        //Action bar title
+        View view = getLayoutInflater().inflate(R.layout.action_bar, null);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+
+        TextView Title = (TextView) view.findViewById(R.id.actionbar_title);
+        Title.setText("Home");
+        String color = getString(Integer.parseInt(String.valueOf(R.color.white)));
+        Title.setTextColor(Color.parseColor(color));
+
+        getSupportActionBar().setCustomView(view,params);
+        getSupportActionBar().setDisplayShowCustomEnabled(true); //show custom title
+        getSupportActionBar().setDisplayShowTitleEnabled(false); //hide the default title
+
+//        logout = (Button) findViewById(R.id.logout);
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // Perform action on click
+//                Intent activityChangeIntent = new Intent(UserHome.this, OwnerHome.class);
+//                // currentContext.startActivity(activityChangeIntent);
+//                UserHome.this.startActivity(activityChangeIntent);
+//            }
+//        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bnavBar);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
@@ -138,6 +160,7 @@ public class UserHome extends AppCompatActivity {
         cursor.close();
         db.close();
 
+        updateGPS();
         refresh(300000);
     }
 

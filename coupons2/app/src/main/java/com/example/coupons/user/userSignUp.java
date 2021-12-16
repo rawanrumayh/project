@@ -3,10 +3,13 @@ package com.example.coupons.user;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,6 +36,24 @@ public class userSignUp extends AppCompatActivity {
 
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        //Action bar title
+        View view = getLayoutInflater().inflate(R.layout.action_bar, null);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+
+        TextView Title = (TextView) view.findViewById(R.id.actionbar_title);
+        Title.setText("Sign Up");
+        String color = getString(Integer.parseInt(String.valueOf(R.color.white)));
+        Title.setTextColor(Color.parseColor(color));
+
+        getSupportActionBar().setCustomView(view,params);
+        getSupportActionBar().setDisplayShowCustomEnabled(true); //show custom title
+        getSupportActionBar().setDisplayShowTitleEnabled(false); //hide the default title
+
+
 
         //Input
         name = (EditText) findViewById(R.id.userFullName);
@@ -63,7 +84,6 @@ public class userSignUp extends AppCompatActivity {
                             Boolean insert = DB.register( uUsername, pass, uName,"user");
 
                             if(insert == true){
-
                                 if (ContextCompat.checkSelfPermission(userSignUp.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                                     Toast.makeText(userSignUp.this,"Registered Successfully",Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(getApplicationContext(), UserHome.class);
@@ -77,9 +97,12 @@ public class userSignUp extends AppCompatActivity {
                                         ActivityCompat.requestPermissions(userSignUp.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_FINE_LOCATION);
                                     }
                                 }
+                                Toast.makeText(userSignUp.this,"Registration Successful",Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(getApplicationContext(), UserHome.class);
+                                startActivity(i);
                             }
                             else{
-                                Toast.makeText(userSignUp.this,"Registered Failed",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(userSignUp.this,"Registration Failed",Toast.LENGTH_SHORT).show();
                             }
                         }
                         else{

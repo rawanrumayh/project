@@ -21,10 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:layout_centerInParent="true"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp">
+        app:boxCornerRadiusBottomEnd="200dp"
+        app:boxCornerRadiusBottomStart="200dp"
+        app:boxCornerRadiusTopEnd="200dp"
+        app:boxCornerRadiusTopStart="200dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/coffeeName"
@@ -45,10 +45,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp">
+        app:boxCornerRadiusBottomEnd="200dp"
+        app:boxCornerRadiusBottomStart="200dp"
+        app:boxCornerRadiusTopEnd="200dp"
+        app:boxCornerRadiusTopStart="200dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/coffeeUsername"
@@ -69,10 +69,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp">
+        app:boxCornerRadiusBottomEnd="200dp"
+        app:boxCornerRadiusBottomStart="200dp"
+        app:boxCornerRadiusTopEnd="200dp"
+        app:boxCornerRadiusTopStart="200dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/coffeePassword"
@@ -92,10 +92,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_centerInParent="true"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp">
+        app:boxCornerRadiusBottomEnd="200dp"
+        app:boxCornerRadiusBottomStart="200dp"
+        app:boxCornerRadiusTopEnd="200dp"
+        app:boxCornerRadiusTopStart="200dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/coffeePassword2"

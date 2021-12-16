@@ -25,19 +25,26 @@ public class UserType extends AppCompatActivity {
         // calling the action bar
         ActionBar actionBar = getSupportActionBar();
 
+        //Action bar title
+        View view = getLayoutInflater().inflate(R.layout.action_bar, null);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+
+        TextView Title = (TextView) view.findViewById(R.id.actionbar_title);
+        Title.setText("User Type");
+        String color = getString(Integer.parseInt(String.valueOf(R.color.white)));
+        Title.setTextColor(Color.parseColor(color));
+
+        getSupportActionBar().setCustomView(view,params);
+        getSupportActionBar().setDisplayShowCustomEnabled(true); //show custom title
+        getSupportActionBar().setDisplayShowTitleEnabled(false); //hide the default title
+
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        //Center App title
-//        AppCompatTextView mTitleTextView = new AppCompatTextView(getApplicationContext());
-//        mTitleTextView.setSingleLine();
-//        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
-//        layoutParams.gravity = Gravity.CENTER;
-//        actionBar.setCustomView(mTitleTextView, layoutParams);
-//        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_HOME_AS_UP);
-//        mTitleTextView.setText("User Type");
-//        String color = getString(Integer.parseInt(String.valueOf(R.color.white)));
-//        mTitleTextView.setTextColor(Color.parseColor(color));
+
     }
 
     public void toCoffeeOwner(View view){
