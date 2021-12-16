@@ -23,8 +23,9 @@ public class UserMapsActivity extends FragmentActivity implements OnMapReadyCall
 
     private GoogleMap mMap;
 
+    
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) throws RuntimeException {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_user_maps);

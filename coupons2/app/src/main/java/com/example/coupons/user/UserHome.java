@@ -36,6 +36,8 @@ import com.example.coupons.map.GeofenceHelper;
 import com.example.coupons.R;
 import com.example.coupons.globals.BaseClass;
 import com.example.coupons.model.challenge_model;
+import com.example.coupons.owner.OwnerHome;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
@@ -66,6 +68,8 @@ public class UserHome extends LocationBaseActivity {
     challengeAdapter adapter;
     List<challenge_model> challengesList;
     Database dbHelper;
+    Location location2;
+    FusedLocationProviderClient client2;
 
 
     @Override
@@ -137,6 +141,8 @@ public class UserHome extends LocationBaseActivity {
         recyclerView = (RecyclerView) findViewById(R.id.challengeRV);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
         if (BaseClass.triggeredChallenge != -1) {
             Log.d("challenge", "there is a close challenge");
             challengesList.add(
@@ -151,26 +157,95 @@ public class UserHome extends LocationBaseActivity {
             recyclerView.setAdapter(adapter);
         }
         content();
-
     }
 
-    @SuppressLint("MissingPermission")
-    public void content() {
-
+    private void zoomMyCuurentLocation() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria criteria = new Criteria();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
         Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
         if (location != null) {
             double lat = location.getLatitude();
             double longi = location.getLongitude();
             LatLng latLng = new LatLng(lat, longi);
-            BaseClass.location_saved= true;
-            BaseClass.my_lat= lat;
-            BaseClass.my_lng= longi;
-//            fragment= new MapsFragment();
-//            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
-//            Toast.makeText(UserHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
+            BaseClass.location_saved = true;
+            BaseClass.my_lat = lat;
+            BaseClass.my_lng = longi;
+
+            Toast.makeText(UserHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
+        } else {
+            setMyLastLocation();
         }
+    }
+
+    private void setMyLastLocation() {
+        Log.d("TAG", "setMyLastLocation: excecute, and get last location");
+        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    double lat = location.getLatitude();
+                    double longi = location.getLongitude();
+                    LatLng latLng = new LatLng(lat, longi);
+                    BaseClass.my_lat = lat;
+                    BaseClass.my_lng = longi;
+//                    fragment= new MapsFragment();
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
+                    Log.d("TAG", "MyLastLocation coordinat :" + latLng);
+                    Toast.makeText(UserHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_SHORT).show();
+//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.f));
+                }
+            }
+        });
+    }
+
+
+    private void updateGPS() {
+        client2 = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            zoomMyCuurentLocation();
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_FINE_LOCATION);
+            }
+        }
+    }
+
+    public void content() {
+
+//        Database dbHelper = new Database(UserHome.this);
+//        SQLiteDatabase db = dbHelper.getReadableDatabase();
+//        Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colChallengeID},
+//                null, null, null, null, null); //selection
+//
+//
+//        // intent id
+//        if (cursor != null) {
+//            while (cursor.moveToNext()) {
+//                @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(Database.colChallengeID));
+//                if (dbHelper.getChallengeLat(id).equals("" + BaseClass.my_lat)) {
+//                    if (dbHelper.getChallengeLng(id).equals("" + BaseClass.my_lng))
+//                        challengesList.add(
+//                                new challenge_model(
+//                                        Integer.parseInt(id),
+//                                        dbHelper.getChallengeQuestion(id),
+//                                        dbHelper.getChallengeAnswer(id)
+//                                )
+//                        );
+//                } else Log.d("heeeeereeeee", "heeereeeeee");
+//            }
+//        }
+//        cursor.close();
+//
+//
+//        adapter = new challengeAdapter(this, challengesList);
+//        recyclerView.setAdapter(adapter);
 
         if (BaseClass.triggeredChallenge != -1) {
             Log.d("challenge", "there is a close challenge");
@@ -227,7 +302,10 @@ public class UserHome extends LocationBaseActivity {
 //        Toast.makeText(this, "YESSS", Toast.LENGTH_SHORT).show();
     }
 
-    @SuppressLint("MissingPermission")
+    private void populateNearestPolls() {
+        adapter.setData(dbHelper.getNearestChallenge(location2));
+    }
+
     @Override
     public void onLocationChanged(Location location) {
         StringBuilder locationString = new StringBuilder();
@@ -244,17 +322,18 @@ public class UserHome extends LocationBaseActivity {
             String address = addresses.get(0).getAddressLine(0);
             BaseClass.my_lng = location.getLongitude();
             BaseClass.my_lat = location.getLatitude();
+            location2 = location;
 //            fragment = new MapsFragment();
 //            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder2, fragment).commit();
 
             this.address = address;
             Toast.makeText(this, "address" + address, Toast.LENGTH_LONG).show();
+            populateNearestPolls();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-//        populateNearestPolls();
 
         dismissProgress();
     }
@@ -353,14 +432,14 @@ public class UserHome extends LocationBaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.user_bar,menu);
+        getMenuInflater().inflate(R.menu.user_bar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.uSettings:
                 Intent i = new Intent(getApplicationContext(), userSettings.class);
                 startActivity(i);

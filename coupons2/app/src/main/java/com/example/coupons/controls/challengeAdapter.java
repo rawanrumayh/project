@@ -1,6 +1,7 @@
 package com.example.coupons.controls;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coupons.R;
 import com.example.coupons.model.challenge_model;
+import com.example.coupons.user.Challenge;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class challengeAdapter extends RecyclerView.Adapter<challengeAdapter.challengeViewHolder> {
+public class challengeAdapter extends RecyclerView.Adapter<challengeAdapter.challengeViewHolder> implements View.OnClickListener {
 
     private Context context;
     private List<challenge_model> challengeList;
@@ -23,6 +26,11 @@ public class challengeAdapter extends RecyclerView.Adapter<challengeAdapter.chal
     public challengeAdapter(Context context, List<challenge_model> challengeList) {
         this.context = context;
         this.challengeList = challengeList;
+    }
+
+    public void setData(ArrayList<challenge_model> polls){
+        this.challengeList = polls;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -38,11 +46,15 @@ public class challengeAdapter extends RecyclerView.Adapter<challengeAdapter.chal
     public void onBindViewHolder(@NonNull challengeViewHolder holder, int position) {
         challenge_model challenge= challengeList.get(position);
 //        holder.idTV.setText(""+challenge.getId());
+        context = holder.itemView.getContext();
         holder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO
                 // redirect user to the challenge
+                Intent i = new Intent(context, Challenge.class);
+                i.putExtra("id", challengeList.get(0).getId()+"");
+                context.startActivity(i);
             }
         });
 
@@ -53,6 +65,11 @@ public class challengeAdapter extends RecyclerView.Adapter<challengeAdapter.chal
         return challengeList.size();
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
     class  challengeViewHolder extends RecyclerView.ViewHolder{
 
         Button playButton;
@@ -60,6 +77,7 @@ public class challengeAdapter extends RecyclerView.Adapter<challengeAdapter.chal
 
         public challengeViewHolder(@NonNull View itemView) {
             super(itemView);
+            context = itemView.getContext();
 
 //            idTV = itemView.findViewById(R.id.idTV);
             playButton= itemView.findViewById(R.id.playButton);
