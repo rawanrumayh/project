@@ -17,54 +17,27 @@
         android:textColor="@color/FirstColor"
         android:textStyle="bold"
         android:layout_marginTop="80dp"
-        android:layout_marginBottom="80dp"/>
+        android:layout_marginBottom="30dp"/>
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusBottomEnd="200dp"
+        app:boxCornerRadiusBottomStart="200dp"
+        app:boxCornerRadiusTopEnd="200dp"
+        app:boxCornerRadiusTopStart="200dp"
         android:layout_margin="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EnterQuestionField"
-        android:padding="10dp"
+        android:padding="15dp"
         android:textColor="@color/SecondColor"
         android:hint="Question"
         android:textSize="18sp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="350dp"
-        android:layout_height="50dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp"
-        android:layout_margin="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/EnterAnswerField"
-        android:layout_marginTop="80dp"
-        android:padding="15dp"
-        android:textColor="@color/SecondColor"
-        android:hint="Answer"
-        android:textSize="18sp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,10 +47,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusBottomEnd="200dp"
+        app:boxCornerRadiusBottomStart="200dp"
+        app:boxCornerRadiusTopEnd="200dp"
+        app:boxCornerRadiusTopStart="200dp"
+        android:layout_margin="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/EnterAnswerField"
+        android:padding="15dp"
+        android:textColor="@color/SecondColor"
+        android:hint="Answer"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:boxCornerRadiusBottomEnd="200dp"
+        app:boxCornerRadiusBottomStart="200dp"
+        app:boxCornerRadiusTopEnd="200dp"
+        app:boxCornerRadiusTopStart="200dp"
         android:layout_margin="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
     <com.google.android.material.textfield.TextInputEditText
@@ -87,8 +83,6 @@
         android:gravity="center"
         android:hint="Coupon"
         android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -100,10 +94,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusBottomEnd="200dp"
+        app:boxCornerRadiusBottomStart="200dp"
+        app:boxCornerRadiusTopEnd="200dp"
+        app:boxCornerRadiusTopStart="200dp"
         android:layout_margin="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -112,7 +106,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="Percentage"
-            android:padding="10dp"
+            android:padding="15dp"
             android:textColor="@color/SecondColor"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
