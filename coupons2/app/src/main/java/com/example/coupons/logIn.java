@@ -72,7 +72,7 @@ public class logIn extends AppCompatActivity {
                     if(login == true){
                         updateGPS();
 
-                        Toast.makeText(logIn.this,"log in successful"+ BaseClass.my_lng+""+BaseClass.my_lat,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(logIn.this,"log in successful",Toast.LENGTH_SHORT).show();
 
                         String type = DB.getUserType(UserName);
 

@@ -30,39 +30,39 @@
         android:textSize="20dp"
         android:textStyle="bold" />
 
-    <HorizontalScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="430dp">
+        android:layout_height="450dp">
 
-        <!--        <LinearLayout-->
-        <!--            android:id="@+id/ChallengesLayout"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginLeft="10dp"-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:layout_marginRight="10dp"-->
-        <!--            android:layout_marginBottom="30dp"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            android:padding="30dp"></LinearLayout>-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="430dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp">
+                <LinearLayout
+                    android:id="@+id/ChallengesLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:padding="30dp"></LinearLayout>
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:layout_marginBottom="10dp">-->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/challengeRV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center">
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/challengeRV"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center">-->
 
 
-            </androidx.recyclerview.widget.RecyclerView>
-        </RelativeLayout>
-    </HorizontalScrollView>
+<!--            </androidx.recyclerview.widget.RecyclerView>-->
+<!--        </RelativeLayout>-->
+    </ScrollView>
 
 
 
