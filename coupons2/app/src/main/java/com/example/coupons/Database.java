@@ -98,7 +98,25 @@ public class Database extends SQLiteOpenHelper {
         return value;
     }
 
-    public String getChallengeLat(String id){
+    public double getChallengeLat(String id){
+        double value=0;
+        SQLiteDatabase db= this.getReadableDatabase();
+        Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colOwnerLat},
+                "ChallengeID=?", new String[]{id}, null, null, null); //selection
+
+        // intent id
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") double lat = cursor.getDouble(cursor.getColumnIndex(Database.colOwnerLat));
+                value= lat;
+            }
+        }
+        cursor.close();
+        return value;
+    }
+
+
+    public String getChallengeAddress(String id){
         String value="";
         SQLiteDatabase db= this.getReadableDatabase();
         Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colOwnerLat},
@@ -115,8 +133,8 @@ public class Database extends SQLiteOpenHelper {
         return value;
     }
 
-    public String getChallengeLng(String id){
-        String value="";
+    public double getChallengeLng(String id){
+        double value=0;
         SQLiteDatabase db= this.getReadableDatabase();
         Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colOwnerLng},
                 "ChallengeID=?", new String[]{id}, null, null, null); //selection
@@ -124,7 +142,7 @@ public class Database extends SQLiteOpenHelper {
         // intent id
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                @SuppressLint("Range") String lat = cursor.getString(cursor.getColumnIndex(Database.colOwnerLng));
+                @SuppressLint("Range") double lat = cursor.getDouble(cursor.getColumnIndex(Database.colOwnerLng));
                 value= lat;
             }
         }

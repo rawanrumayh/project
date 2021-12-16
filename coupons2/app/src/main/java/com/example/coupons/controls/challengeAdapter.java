@@ -28,10 +28,10 @@ public class challengeAdapter extends RecyclerView.Adapter<challengeAdapter.chal
         this.challengeList = challengeList;
     }
 
-    public void setData(ArrayList<challenge_model> polls){
-        this.challengeList = polls;
-        notifyDataSetChanged();
-    }
+//    public void clearAdapter() {
+//        this.challengeList.clear();
+//    }
+
 
     @NonNull
     @Override

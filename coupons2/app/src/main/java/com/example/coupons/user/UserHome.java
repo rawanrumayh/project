@@ -25,11 +25,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coupons.Database;
+import com.example.coupons.NotificationHelper;
 import com.example.coupons.UserMapsActivity;
 import com.example.coupons.controls.challengeAdapter;
 import com.example.coupons.map.GeofenceHelper;
@@ -56,7 +58,7 @@ import java.util.Locale;
 
 public class UserHome extends LocationBaseActivity {
     private static final int PERMISSIONS_FINE_LOCATION = 99;
-    private static final int PERMISSIONS_BACKGROUND_LOCATION = 170;
+    private static final int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 170;
     private ProgressDialog progressDialog;
     private String address = "";
     Fragment fragment;
@@ -68,13 +70,20 @@ public class UserHome extends LocationBaseActivity {
     challengeAdapter adapter;
     List<challenge_model> challengesList;
     Database dbHelper;
-    Location location2;
+    NotificationHelper nHelper;
     FusedLocationProviderClient client2;
+    double curlat, curlng;
 
 
     @Override
     public LocationConfiguration getLocationConfiguration() {
         return Configurations.defaultConfiguration("Location permission!", "Would you mind to turn GPS on?");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+//        content2();
     }
 
     @Override
@@ -92,6 +101,7 @@ public class UserHome extends LocationBaseActivity {
 //                UserHome.this.startActivity(activityChangeIntent);
 //            }
 //        });
+         nHelper= new NotificationHelper(this);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bnavBar);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
@@ -127,13 +137,20 @@ public class UserHome extends LocationBaseActivity {
         helper = new GeofenceHelper(this);
 
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            getAllGeofences();
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, PERMISSIONS_BACKGROUND_LOCATION);
+        if (Build.VERSION.SDK_INT >= 29) {
+            //We need background permission
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                getAllGeofences();
+            } else {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                    //We show a dialog and ask for permission
+                    ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
+                }
             }
         }
+
 
         dbHelper = new Database(UserHome.this);
 
@@ -155,8 +172,40 @@ public class UserHome extends LocationBaseActivity {
 
             adapter = new challengeAdapter(this, challengesList);
             recyclerView.setAdapter(adapter);
+        } else {
+            updateGPS();
+            Database dbHelper = new Database(UserHome.this);
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colChallengeID},
+                    null, null, null, null, null); //selection
+
+
+            // intent id
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+                    @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(Database.colChallengeID));
+                    if(dbHelper.getChallengeLng(id)==BaseClass.my_lng && dbHelper.getChallengeLat(id)==BaseClass.my_lat) {
+                        nHelper.sendHighPriorityNotification("Around U!", "Play and Earn your Coupon!", UserHome.class);
+                        Toast.makeText(this, "did find", Toast.LENGTH_SHORT).show();
+                        challengesList.add(
+                                new challenge_model(
+                                        Integer.parseInt(id),
+                                        dbHelper.getChallengeQuestion(id),
+                                        dbHelper.getChallengeAnswer(id)
+                                )
+                        );
+                    }
+//                    Log.d("heeeeereeeee", "heeereeeeee");
+                }
+            }
+            cursor.close();
+
+
+            adapter = new challengeAdapter(this, challengesList);
+            recyclerView.setAdapter(adapter);
         }
-        content();
+
+        refresh(10000);
     }
 
     private void zoomMyCuurentLocation() {
@@ -174,7 +223,7 @@ public class UserHome extends LocationBaseActivity {
             BaseClass.my_lat = lat;
             BaseClass.my_lng = longi;
 
-            Toast.makeText(UserHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
+//            Toast.makeText(UserHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
         } else {
             setMyLastLocation();
         }
@@ -198,7 +247,7 @@ public class UserHome extends LocationBaseActivity {
 //                    fragment= new MapsFragment();
 //                    getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
                     Log.d("TAG", "MyLastLocation coordinat :" + latLng);
-                    Toast.makeText(UserHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(UserHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_SHORT).show();
 //                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.f));
                 }
             }
@@ -219,34 +268,6 @@ public class UserHome extends LocationBaseActivity {
 
     public void content() {
 
-//        Database dbHelper = new Database(UserHome.this);
-//        SQLiteDatabase db = dbHelper.getReadableDatabase();
-//        Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colChallengeID},
-//                null, null, null, null, null); //selection
-//
-//
-//        // intent id
-//        if (cursor != null) {
-//            while (cursor.moveToNext()) {
-//                @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(Database.colChallengeID));
-//                if (dbHelper.getChallengeLat(id).equals("" + BaseClass.my_lat)) {
-//                    if (dbHelper.getChallengeLng(id).equals("" + BaseClass.my_lng))
-//                        challengesList.add(
-//                                new challenge_model(
-//                                        Integer.parseInt(id),
-//                                        dbHelper.getChallengeQuestion(id),
-//                                        dbHelper.getChallengeAnswer(id)
-//                                )
-//                        );
-//                } else Log.d("heeeeereeeee", "heeereeeeee");
-//            }
-//        }
-//        cursor.close();
-//
-//
-//        adapter = new challengeAdapter(this, challengesList);
-//        recyclerView.setAdapter(adapter);
-
         if (BaseClass.triggeredChallenge != -1) {
             Log.d("challenge", "there is a close challenge");
             challengesList.clear();
@@ -260,8 +281,43 @@ public class UserHome extends LocationBaseActivity {
 
             adapter = new challengeAdapter(UserHome.this, challengesList);
             recyclerView.setAdapter(adapter);
+        } else {
+            content2();
         }
-        refresh(1000);
+    }
+
+    public void content2()
+    {
+        Database dbHelper = new Database(UserHome.this);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colChallengeID},
+                null, null, null, null, null); //selection
+
+
+        // intent id
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(Database.colChallengeID));
+                if(dbHelper.getChallengeLng(id)==BaseClass.my_lng && dbHelper.getChallengeLat(id)==BaseClass.my_lat) {
+                    nHelper.sendHighPriorityNotification("Around U!", "Play and Earn your Coupon!", UserHome.class);
+                    Toast.makeText(this, "did find", Toast.LENGTH_SHORT).show();
+                    challengesList.add(
+                            new challenge_model(
+                                    Integer.parseInt(id),
+                                    dbHelper.getChallengeQuestion(id),
+                                    dbHelper.getChallengeAnswer(id)
+                            )
+                    );
+                }
+                    Log.d("heeeeereeeee", "heeereeeeee");
+            }
+        }
+        cursor.close();
+
+
+        adapter = new challengeAdapter(this, challengesList);
+        recyclerView.setAdapter(adapter);
+        refresh(10000);
     }
 
     private void refresh(int ms) {
@@ -288,7 +344,7 @@ public class UserHome extends LocationBaseActivity {
 
                 } else
                     Toast.makeText(this, "this app was not granted permission", Toast.LENGTH_SHORT).show();
-            case PERMISSIONS_BACKGROUND_LOCATION:
+            case BACKGROUND_LOCATION_ACCESS_REQUEST_CODE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getAllGeofences();
                 } else
@@ -302,9 +358,6 @@ public class UserHome extends LocationBaseActivity {
 //        Toast.makeText(this, "YESSS", Toast.LENGTH_SHORT).show();
     }
 
-    private void populateNearestPolls() {
-        adapter.setData(dbHelper.getNearestChallenge(location2));
-    }
 
     @Override
     public void onLocationChanged(Location location) {
@@ -313,26 +366,27 @@ public class UserHome extends LocationBaseActivity {
         locationString.append("\n");
         locationString.append("Latitude: " + location.getLatitude());
 //        Log.i(BaseClass.TAG, "location : " + locationString);
-        BaseClass.my_lng = location.getLongitude();
-        BaseClass.my_lat = location.getLatitude();
+//        BaseClass.my_lng = location.getLongitude();
+//        BaseClass.my_lat = location.getLatitude();
 
-        try {
-            Geocoder geocoder = new Geocoder(UserHome.this, Locale.getDefault());
-            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-            String address = addresses.get(0).getAddressLine(0);
-            BaseClass.my_lng = location.getLongitude();
-            BaseClass.my_lat = location.getLatitude();
-            location2 = location;
-//            fragment = new MapsFragment();
-//            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder2, fragment).commit();
+        if (location != null){
+            try {
+                Geocoder geocoder = new Geocoder(UserHome.this, Locale.getDefault());
+                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                String address = addresses.get(0).getAddressLine(0);
+                BaseClass.my_lng = location.getLongitude();
+                BaseClass.my_lat = location.getLatitude();
+                curlat= location.getLatitude();
+                curlng= location.getLongitude();
+                this.address = address;
+                refresh(10000);
+//            content2();
 
-            this.address = address;
-            Toast.makeText(this, "address" + address, Toast.LENGTH_LONG).show();
-            populateNearestPolls();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
 
 
         dismissProgress();
@@ -353,6 +407,8 @@ public class UserHome extends LocationBaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+//        content();
 
         if (getLocationManager().isWaitingForLocation()
                 && !getLocationManager().isAnyDialogShowing()) {
@@ -423,7 +479,7 @@ public class UserHome extends LocationBaseActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
 //                    Toast.makeText(UserHome.this, "here", Toast.LENGTH_LONG).show();
-                    Log.d("client.addGeofences", e.toString());
+//                    Log.d("client.addGeofences", e.toString());
                 }
             });
 

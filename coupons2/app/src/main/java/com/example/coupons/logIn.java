@@ -3,7 +3,9 @@ package com.example.coupons;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -26,6 +28,9 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.util.List;
+import java.util.Locale;
 
 public class logIn extends AppCompatActivity {
     EditText username,password;
@@ -66,6 +71,7 @@ public class logIn extends AppCompatActivity {
 
                     if(login == true){
                         updateGPS();
+
                         Toast.makeText(logIn.this,"log in successful"+ BaseClass.my_lng+""+BaseClass.my_lat,Toast.LENGTH_SHORT).show();
 
                         String type = DB.getUserType(UserName);
@@ -95,7 +101,6 @@ public class logIn extends AppCompatActivity {
     }
 
     private void zoomMyCuurentLocation() {
-
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -109,6 +114,16 @@ public class logIn extends AppCompatActivity {
             BaseClass.location_saved= true;
             BaseClass.my_lat= lat;
             BaseClass.my_lng= longi;
+            try {
+                Geocoder geocoder = new Geocoder(logIn.this, Locale.getDefault());
+                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                String address = addresses.get(0).getAddressLine(0);
+                BaseClass.my_lng = location.getLongitude();
+                BaseClass.my_lat = location.getLatitude();
+                BaseClass.address = address;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 //            fragment= new MapsFragment();
 //            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
         } else {
@@ -117,7 +132,6 @@ public class logIn extends AppCompatActivity {
     }
 
     private void setMyLastLocation() {
-        Log.d("TAG", "setMyLastLocation: excecute, and get last location");
         FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
         }
@@ -125,15 +139,21 @@ public class logIn extends AppCompatActivity {
             @Override
             public void onSuccess(Location location) {
                 if (location != null) {
-                    double lat = location.getLatitude();
-                    double longi = location.getLongitude();
-                    LatLng latLng = new LatLng(lat, longi);
-                    BaseClass.my_lat= lat;
-                    BaseClass.my_lng= longi;
-//                    fragment= new MapsFragment();
-//                    getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
-                    Log.d("TAG", "MyLastLocation coordinat :" + latLng);
-//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.f));
+                    try {
+                        Geocoder geocoder = new Geocoder(logIn.this, Locale.getDefault());
+                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                        String address = addresses.get(0).getAddressLine(0);
+                        BaseClass.my_lng = location.getLongitude();
+                        BaseClass.my_lat = location.getLatitude();
+                        BaseClass.address = address;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+//                    double lat = location.getLatitude();
+//                    double longi = location.getLongitude();
+//                    LatLng latLng = new LatLng(lat, longi);
+//                    BaseClass.my_lat= lat;
+//                    BaseClass.my_lng= longi;
                 }
             }
         });

@@ -116,7 +116,7 @@ public class OwnerHome extends AppCompatActivity {
             BaseClass.my_lng= longi;
 //            fragment= new MapsFragment();
 //            getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
-            Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
+//            Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_LONG).show();
         } else {
             setMyLastLocation();
         }
@@ -140,7 +140,7 @@ public class OwnerHome extends AppCompatActivity {
 //                    fragment= new MapsFragment();
 //                    getSupportFragmentManager().beginTransaction().replace(R.id.map_holder, fragment).commit();
                     Log.d("TAG", "MyLastLocation coordinat :" + latLng);
-                    Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(OwnerHome.this, "MyLastLocation coordinat :" + latLng, Toast.LENGTH_SHORT).show();
 //                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.f));
                 }
             }
