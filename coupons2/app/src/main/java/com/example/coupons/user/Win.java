@@ -21,7 +21,7 @@ public class Win extends AppCompatActivity {
         text.setText(getIntent().getStringExtra("coupon"));
 
         TextView coupontitletext = findViewById(R.id.couponTitle);
-        coupontitletext.setText("Your " + getIntent().getStringExtra("percentage") + "% coupon");
+        coupontitletext.setText("Your " + getIntent().getStringExtra("percentage") + "% coupon by "+ getIntent().getStringExtra("owner") );
 
         Button thanks = (Button) findViewById(R.id.thanks);
         thanks.setOnClickListener(new View.OnClickListener() {

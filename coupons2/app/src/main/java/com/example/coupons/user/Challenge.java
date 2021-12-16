@@ -98,7 +98,8 @@ public class Challenge extends AppCompatActivity {
         if (field.getText().toString().equals(answer)) {
             Intent intent = new Intent(Challenge.this, Win.class);
             intent.putExtra("coupon", db.getChallengeCoupon(challengeID));
-            intent.putExtra("percentage", db.getChallengeCoupon(challengeID) );
+            intent.putExtra("percentage", db.getChallengeCouponP(challengeID));
+            intent.putExtra("owner", db.getChallengeOwner(challengeID));
             startActivity(intent);
             finish();
             // field.setText("");
