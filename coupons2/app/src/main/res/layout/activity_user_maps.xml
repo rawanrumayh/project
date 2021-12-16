@@ -11,7 +11,7 @@
         android:id="@+id/map"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="590dp"
+        android:layout_height="620dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
          />

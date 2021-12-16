@@ -32,18 +32,19 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="450dp">
+        android:layout_height="400dp">
 
                 <LinearLayout
                     android:id="@+id/ChallengesLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:paddingTop="50dp"
+                    android:scrollbars="vertical"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal"
-                    android:padding="30dp"></LinearLayout>
+                    ></LinearLayout>
 <!--        <RelativeLayout-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_gravity="center"-->

@@ -62,6 +62,8 @@ public class UserHome extends AppCompatActivity {
     Database dbHelper;
     NotificationHelper nHelper;
     FusedLocationProviderClient client2;
+    LinearLayout Challengeslayout;
+
 
 
     @Override
@@ -139,6 +141,8 @@ public class UserHome extends AppCompatActivity {
             }
         }
 
+        Challengeslayout = (LinearLayout) findViewById(R.id.ChallengesLayout);
+
 
         dbHelper = new Database(UserHome.this);
 
@@ -148,6 +152,7 @@ public class UserHome extends AppCompatActivity {
 
         // intent id
         if (cursor != null) {
+            Challengeslayout.removeAllViews();
             while (cursor.moveToNext()) {
                 @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(Database.colChallengeID));
                 if (dbHelper.getChallengeLng(id) == BaseClass.my_lng && dbHelper.getChallengeLat(id) == BaseClass.my_lat) {
@@ -160,11 +165,12 @@ public class UserHome extends AppCompatActivity {
         db.close();
 
         updateGPS();
-        refresh(300000);
+        refresh(180000);
     }
 
 
     public void content3() {
+        Challengeslayout = (LinearLayout) findViewById(R.id.ChallengesLayout);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(Database.ChallengesTable, new String[]{Database.colChallengeID},
                 null, null, null, null, null); //selection
@@ -182,7 +188,7 @@ public class UserHome extends AppCompatActivity {
         cursor.close();
         db.close();
 
-        refresh(300000);
+        refresh(180000);
     }
 
     private void refresh(int ms) {
@@ -346,8 +352,6 @@ public class UserHome extends AppCompatActivity {
 
 
     private void AddView(String id) {
-        LinearLayout Challengeslayout = (LinearLayout) findViewById(R.id.ChallengesLayout);
-
         final String cId = id;
         LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(380, 560);
         layout.rightMargin = 10;
@@ -389,7 +393,6 @@ public class UserHome extends AppCompatActivity {
                 Intent i = new Intent(UserHome.this, Challenge.class);
                 i.putExtra("id", cId);
                 UserHome.this.startActivity(i);
-
             }
         });
 
