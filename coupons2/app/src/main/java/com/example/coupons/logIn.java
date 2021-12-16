@@ -3,15 +3,18 @@ package com.example.coupons;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,6 +47,24 @@ public class logIn extends AppCompatActivity {
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //Action bar title
+        View view = getLayoutInflater().inflate(R.layout.action_bar, null);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+
+        TextView Title = (TextView) view.findViewById(R.id.actionbar_title);
+        Title.setText("Login");
+        String color = getString(Integer.parseInt(String.valueOf(R.color.white)));
+        Title.setTextColor(Color.parseColor(color));
+
+        getSupportActionBar().setCustomView(view,params);
+        getSupportActionBar().setDisplayShowCustomEnabled(true); //show custom title
+        getSupportActionBar().setDisplayShowTitleEnabled(false); //hide the default title
+
+
+
         //Input
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
@@ -66,7 +87,7 @@ public class logIn extends AppCompatActivity {
 
                     if(login == true){
                         updateGPS();
-                        Toast.makeText(logIn.this,"log in successful"+ BaseClass.my_lng+""+BaseClass.my_lat,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(logIn.this,"login successful"+ BaseClass.my_lng+""+BaseClass.my_lat,Toast.LENGTH_SHORT).show();
 
                         String type = DB.getUserType(UserName);
 

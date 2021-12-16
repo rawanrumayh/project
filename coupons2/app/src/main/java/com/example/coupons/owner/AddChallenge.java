@@ -3,10 +3,13 @@ package com.example.coupons.owner;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -24,11 +27,27 @@ public class AddChallenge extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addchallenge);
+
         // calling the action bar
         ActionBar actionBar = getSupportActionBar();
-
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
+        //Action bar title
+        View view = getLayoutInflater().inflate(R.layout.action_bar, null);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+
+        TextView Title = (TextView) view.findViewById(R.id.actionbar_title);
+        Title.setText("Add Challenge");
+        String color = getString(Integer.parseInt(String.valueOf(R.color.white)));
+        Title.setTextColor(Color.parseColor(color));
+
+        getSupportActionBar().setCustomView(view,params);
+        getSupportActionBar().setDisplayShowCustomEnabled(true); //show custom title
+        getSupportActionBar().setDisplayShowTitleEnabled(false); //hide the default title
+
 
         EditText questionField = (EditText) findViewById(R.id.EnterQuestionField);
         EditText answerField = (EditText) findViewById(R.id.EnterAnswerField);

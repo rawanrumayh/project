@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="Log In"
+        android:text="LogIn"
         android:textColor="@color/FirstColor"
         android:textSize="40dp"
         android:textStyle="bold" />
